@@ -1,11 +1,18 @@
-import {checkForBold} from './helpers.js'
+import {
+	checkForBold,
+	checkForItalic,
+	checkForUnderline
+} from './helpers.js'
 
-function swapSpansToBolds(input) {
+function swapSpans(input) {
 	let newString = ''
 	let inTag = false
 	let inSpanTag = false
-	let cleanUpCount = 0;
+	let shouldBeBold = false;
+	let shouldBeItalic = false;
+	let shouldBeUnderlined = false;
 	let nextTagFlagged = false
+	let cleanUpCount = 0;
 
 	for(let i = 0; i < input.length; i++) {
 		if(cleanUpCount > 0) {
@@ -40,10 +47,27 @@ function swapSpansToBolds(input) {
 			}
 
 			let isBold = checkForBold(tagContents)
+			let isItalic = checkForItalic(tagContents)
+			let isUnderlined = checkForUnderline(tagContents)
 			if(isBold) {
 				newString += 'b'
+				shouldBeBold = true
 				nextTagFlagged = true
-			} else {
+			} 
+			
+			else if(isItalic) {
+				newString += 'i'
+				shouldBeItalic = true
+				nextTagFlagged = true
+			}
+
+			else if(isUnderlined) {
+				newString += 'u'
+				shouldBeUnderlined = true
+				nextTagFlagged = true
+			}
+
+			else {
 				cleanUpCount = 0;
 				newString += input[i]
 			}
@@ -52,9 +76,25 @@ function swapSpansToBolds(input) {
 		else if(inTag && nextTagFlagged) {
 			// do nothing until..
 			if(input[i] === '>') {
-				newString += '/b>'
-				inTag = false
-				nextTagFlagged = false
+				if(shouldBeBold) {
+					newString += '/b>'
+					inTag = false
+					nextTagFlagged = false
+					shouldBeBold = false;
+				}
+				if(shouldBeItalic) {
+					newString += '/i>'
+					inTag = false
+					nextTagFlagged = false
+					shouldBeItalic = false;
+				}
+				if(shouldBeUnderlined) {
+					newString += '/u>'
+					inTag = false
+					nextTagFlagged = false
+					shouldBeUnderlined = false;
+				}
+				
 			}
 		}
 
@@ -79,8 +119,8 @@ function removeMetaTags(input) {
 
 function formatHTML(input) {
 	let metaTagsRemoved = removeMetaTags(input)
-	let boldTagsAdded = swapSpansToBolds(metaTagsRemoved)
-	return boldTagsAdded
+	let spansSwapped = swapSpans(metaTagsRemoved)
+	return spansSwapped
 }
 
 function pasteClipboard(event) {
