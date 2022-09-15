@@ -1,132 +1,44 @@
 import {
-	checkForBold,
-	checkForItalic,
-	checkForUnderline
-} from './helpers.js'
-
-function swapSpans(input) {
-	let newString = ''
-	let inTag = false
-	let inSpanTag = false
-	let shouldBeBold = false;
-	let shouldBeItalic = false;
-	let shouldBeUnderlined = false;
-	let nextTagFlagged = false
-	let cleanUpCount = 0;
-
-	for(let i = 0; i < input.length; i++) {
-		if(cleanUpCount > 0) {
-			cleanUpCount--
-		}
-		
-		else if(input[i] === '<') {
-			inTag = true
-			newString += input[i]
-			
-			// how else to detect if in span tag?
-			if(input[i + 1] === 's') {
-				if(input[i + 2] === 'p') {
-					inSpanTag = true
-				}
-			}
-		}
-
-		else if(inTag && inSpanTag) {
-			let tagContents = ''
-
-			// grab full contents of span tag
-			for(let j = 0; j < input.length; j++) {
-				if(input[i + j] !== '>') {
-				 tagContents += input[i + j]
-				 cleanUpCount = j
-				} else {
-					inTag = false
-					inSpanTag = false
-					break;
-				}
-			}
-
-			let isBold = checkForBold(tagContents)
-			let isItalic = checkForItalic(tagContents)
-			let isUnderlined = checkForUnderline(tagContents)
-			if(isBold) {
-				newString += 'b'
-				shouldBeBold = true
-				nextTagFlagged = true
-			} 
-			
-			else if(isItalic) {
-				newString += 'i'
-				shouldBeItalic = true
-				nextTagFlagged = true
-			}
-
-			else if(isUnderlined) {
-				newString += 'u'
-				shouldBeUnderlined = true
-				nextTagFlagged = true
-			}
-
-			else {
-				cleanUpCount = 0;
-				newString += input[i]
-			}
-		}
-
-		else if(inTag && nextTagFlagged) {
-			// do nothing until..
-			if(input[i] === '>') {
-				if(shouldBeBold) {
-					newString += '/b>'
-					inTag = false
-					nextTagFlagged = false
-					shouldBeBold = false;
-				}
-				if(shouldBeItalic) {
-					newString += '/i>'
-					inTag = false
-					nextTagFlagged = false
-					shouldBeItalic = false;
-				}
-				if(shouldBeUnderlined) {
-					newString += '/u>'
-					inTag = false
-					nextTagFlagged = false
-					shouldBeUnderlined = false;
-				}
-				
-			}
-		}
-
-		else if (input[i] === '>') {
-			newString += input[i]
-			inTag = false
-		}
-
-		else {
-			newString += input[i]
-		}
-	}
-	
-	return newString
-}
-
-function removeMetaTags(input) {
-	input = input.split(/(<meta charset="utf-8">)/)
-	input = input.slice(2)
-	return input [0] // convert back to string
-}
+	removeMetaTags,
+	swapSpans,
+	formatLinks,
+	removeSpans,
+	formatListItems,
+	removeParagraphTags,
+	removeDoubleBreaks
+} from './formatFunctions.js'
 
 function formatHTML(input) {
 	let metaTagsRemoved = removeMetaTags(input)
 	let spansSwapped = swapSpans(metaTagsRemoved)
-	return spansSwapped
+	let spansRemoved = removeSpans(spansSwapped)
+	let linksFormatted = formatLinks(spansRemoved)
+	let listItemsFormatted = formatListItems(linksFormatted)
+	let pTagsRemoved = removeParagraphTags(listItemsFormatted)
+	let doubleBreaksRemoved = removeDoubleBreaks(pTagsRemoved)
+	return doubleBreaksRemoved
 }
 
 function pasteClipboard(event) {
 	let originalHTML = event.clipboardData.getData('text/html')
 	let formattedHTML = formatHTML(originalHTML)
+	document.getElementById('app').innerHTML = formattedHTML
 	console.log(formattedHTML)
 }
 
 window.addEventListener('paste', (e) => pasteClipboard(e))
+
+window.addEventListener('keypress', (e) => {
+	if(e.key === 'Enter') {
+		document.getElementById('app').innerHTML = `
+			<h1 style="font-size: 1.5rem; text-decoration:underline double">Google Doc to WordPress Formatter</h1>
+			<p>Instructions:</p>
+			<ol>
+				<li>Press control + v</li>
+				<li>Press control + a</li>
+				<li>Press control + c</li>
+				<li>Press enter to clear</li>
+			</ol>
+		`
+	}
+})
