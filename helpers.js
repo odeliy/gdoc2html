@@ -37,8 +37,15 @@ export function detectPTag(iterator, string) {
 
 export function detectClosingPTag(iterator, string) {
     if(string[iterator + 1] === '/' && string[iterator + 2] === 'p' && string[iterator + 3] === '>') {
-       console.log('test')
         return true
+    } else {
+        return false
+    }
+}
+
+export function detectListTag(iterator, string) {
+    if(string[iterator + 1] === 'l' && string[iterator + 2] === 'i' && string[iterator + 3] === ' ') {
+       return true
     } else {
         return false
     }

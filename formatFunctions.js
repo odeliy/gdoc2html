@@ -5,7 +5,8 @@ import {
     checkForInternalLink,
     detectSpanTag,
     detectPTag,
-    detectClosingPTag
+    detectClosingPTag,
+	detectListTag
 } from './helpers.js'
 
 export function removeDoubleBreaks(input) {
@@ -55,15 +56,34 @@ export function removeParagraphTags(input) {
 }
 
 export function formatListItems(input) {
-    // let newString = ''
-    // let inTag = false
-    // let inListTag = false
+    let newString = ''
+    let inListTag = false
 
-    // for(let i = 0; i < input.length; i++) {
+    for(let i = 0; i < input.length; i++) {
+		if(input[i] === '<') {
+			inListTag = detectListTag(i, input)
 
-    // }
+			if(inListTag) {
+				newString += '<li'
+			} else {
+				newString += input[i]
+			}
+		}
 
-    return input
+		else if(inListTag) {
+			// burn cycles until..
+			if(input[i] === '>') {
+				inListTag = false
+				newString += input[i]
+			}
+		}
+
+		else {
+			newString += input[i]
+		}
+    }
+
+    return newString
 }
 
 export function formatLinks(input) {

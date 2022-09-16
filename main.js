@@ -1,8 +1,8 @@
 import {
 	removeMetaTags,
 	swapSpans,
-	formatLinks,
 	removeSpans,
+	formatLinks,
 	formatListItems,
 	removeParagraphTags,
 	removeDoubleBreaks
@@ -31,14 +31,7 @@ window.addEventListener('paste', (e) => pasteClipboard(e))
 window.addEventListener('keypress', (e) => {
 	if(e.key === 'Enter') {
 		document.getElementById('app').innerHTML = `
-			<h1 style="font-size: 1.5rem; text-decoration:underline double">Google Doc to WordPress Formatter</h1>
-			<p>Instructions:</p>
-			<ol>
-				<li>Press control + v</li>
-				<li>Press control + a</li>
-				<li>Press control + c</li>
-				<li>Press enter to clear</li>
-			</ol>
+			<p>ready to roll..</p>
 		`
 	}
 })
