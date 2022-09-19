@@ -5,7 +5,7 @@ import {
 	formatLinks,
 	formatListItems,
 	removeParagraphTags,
-	removeDoubleBreaks
+	removeMultipleBreaks
 } from './formatFunctions.js'
 
 function formatHTML(input) {
@@ -15,7 +15,7 @@ function formatHTML(input) {
 	let linksFormatted = formatLinks(spansRemoved)
 	let listItemsFormatted = formatListItems(linksFormatted)
 	let pTagsRemoved = removeParagraphTags(listItemsFormatted)
-	let doubleBreaksRemoved = removeDoubleBreaks(pTagsRemoved)
+	let doubleBreaksRemoved = removeMultipleBreaks(pTagsRemoved)
 	return doubleBreaksRemoved
 }
 

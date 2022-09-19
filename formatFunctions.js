@@ -6,11 +6,55 @@ import {
     detectSpanTag,
     detectPTag,
     detectClosingPTag,
-	detectListTag
+	detectListTag,
+	detectXHTMLBreak
 } from './helpers.js'
 
-export function removeDoubleBreaks(input) {
-    return input
+export function removeMultipleBreaks(input) {
+	// let newString = ''
+	// let XHTMLBreakDetected = false // XHTML style break is <br />
+	// let burnMode = false
+
+	// for(let i = 0; i < input.length; i++) {
+	// 	if(input[i] === '<' && !XHTMLBreakDetected) {
+	// 		XHTMLBreakDetected = detectXHTMLBreak(i, input)
+	// 		newString += input[i]
+	// 	}
+
+	// 	else if(XHTMLBreakDetected) {
+	// 		if(input[i] !== '<') {
+	// 			newString += input[i]
+	// 		}
+
+	// 		// if a <br /> tag follows a <br /> tag
+	// 		else if(input[i] === '<') {
+	// 			if(detectXHTMLBreak(i, input)){
+	// 				burnMode = true
+	// 			} else {
+	// 				XHTMLBreakDetected = false
+	// 				newString += input[i]
+	// 			}
+	// 		}
+	// 	}
+
+	// 	else if(burnMode) {
+	// 		// burn for loop cycles
+	// 		if(input[i] === '<') {
+	// 			if(detectXHTMLBreak(i, input)) {
+	// 				// keep burning cycles
+	// 			} else {
+	// 				burnMode = false
+	// 				newString += input[i]
+	// 			}
+	// 		}
+	// 	}
+
+	// 	else {
+	// 		newString += input[i]
+	// 	}
+	// }
+
+	return input
 }
 
 export function removeParagraphTags(input) {
@@ -175,7 +219,6 @@ export function removeSpans(input) {
 	return newString
 }
 
-// swaps relevant <span style="..."> tags with <b>, <i>, and <u>
 export function swapSpans(input) {
 	let newString = ''
 	let inTag = false

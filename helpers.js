@@ -50,3 +50,11 @@ export function detectListTag(iterator, string) {
         return false
     }
 }
+
+export function detectXHTMLBreak(iterator, string) {
+    if(string[iterator + 1] === 'b' && string[iterator + 2] === 'r' && string[iterator + 3] === ' ' && string[iterator + 4] === '/') {
+       return true
+    } else {
+        return false
+    }
+}
