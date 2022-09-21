@@ -1,4 +1,4 @@
-import { detectFor, detectLink, detectTag } from './detectors.js'
+import { detectFor, detectTag } from './detectors.js'
 
 export function removeTag(input, tagName) {
 	let newString = ''
@@ -67,7 +67,7 @@ export function stripTagAttributes(input) {
 		if (input[i] === '<') {
 			newString += input[i]
 
-            let inLink = detectLink(input, i)
+            let inLink = detectFor(input, i, 'a href')
 			if (!inLink) {
 				inCoreTag = true
 			}

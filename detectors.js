@@ -56,17 +56,6 @@ export function detectItalic(input, startIndex) {
 	return testedTag.indexOf('font-style:italic') > -1 ? true : false
 }
 
-export function detectLink(input, startIndex) {
-	let testedTag = ''
-
-	for (let i = startIndex; i < input.length; i++) {
-		testedTag += input[i]
-		if (input[i] === '>') break
-	}
-
-	return testedTag.indexOf('a href') > -1 ? true : false
-}
-
 export function detectFor(input, startIndex, pattern) {
 	let testedTag = ''
 
