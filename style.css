@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--palette-background-strong: #111213ff;
+	--palette-background-faded: #212224ff;
+	--palette-text-primary: #ffffffff;
+	--palette-text-secondary: #a1a1a1ff;
+	--palette-accent-primary: #2f71e8ff;
+	--palette-accent-secondary: #29b9f0ff;
+	--gap-extra-small: 8px;
+	--gap-small: 16px;
+	--gap-medium: 32px;
+	--gap-large: 64px;
+}
+
+::selection {
+	color: var(--palette-background-strong);
+	background: #ffdb58;
+	/* background: var(--palette-accent-primary); */
+}
+
+html {
+	color: var(--palette-text-primary);
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+	background-color: var(--palette-background-faded);
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-inline: var(--gap-large);
+}
+
+.icon {
+	max-width: 80px;
+}
+
+.app {
+	min-width: 465px;
+	background-color: var(--palette-background-strong);
+	box-shadow: var(--palette-background-strong) 2px 5px 10px;
+	border-radius: 10px;
+}
+
+.no-select {
+	user-select: none;
+}
+
+.title-bar {
+	text-align: center;
+	background-color: var(--palette-background-faded);
+	border: 1px solid var(--palette-background-strong);
+	border-radius: 10px 10px 0 0;
+	padding-inline: var(--gap-medium);
+	padding-block: var(--gap-small);
+}
+
+.main-window {
+	padding: var(--gap-medium);
+}
+
+.hero {
+	display: flex;
+	align-items: center;
+	margin-bottom: var(--gap-medium);
+}
+
+.hero h1 {
+	font-weight: 400;
+	text-align: center;
+}
+
+.instructions {
+	/* background-color: var(--palette-background-faded); */
+	color: var(--palette-text-secondary);
+	min-height: 100px;
+	border-radius: 10px;
+	padding-inline: var(--gap-medium);
+	padding-block: var(--gap-small);
+}
+
+.instructions h2 {
+	color: var(--palette-text-primary);
+	margin-bottom: var(--gap-small);
+}
+
+.instruction {
+	margin-bottom: var(--gap-small);
+}
+
+.instructions ol li {
+	margin-bottom: var(--gap-extra-small);
+}
+
+/************************/
+/* classes come from js */
+/************************/
+.code-container,
+.copied {
+	padding: var(--gap-small);
+}
+
+.copied {
+    color: var(--palette-text-secondary);
+	padding-top: unset;
+}

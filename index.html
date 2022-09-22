@@ -4,19 +4,35 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./style.css">
 		<title>gdoc2wp</title>
 	</head>
 	<body>
-		<div id="app">
-			<h1 style="font-size: 1.5rem; text-decoration:underline double">Google Doc to WordPress Formatter</h1>
-			<p>Instructions:</p>
-			<ol>
-				<li>Press control + v</li>
-				<li>Press control + a</li>
-				<li>Press control + c</li>
-				<li>Paste into WP text editor</li>
-			</ol>
-			<img src="arthur.gif" alt="" style="display: block">
+		<div class="app" id="app">
+			<div class="no-select">
+				<div class="title-bar">
+					<span style="color:var(--palette-text-secondary);">Convert rich text <span style="color:var(--palette-accent-secondary);">cleanly</span></span>
+				</div>
+				<div class="main-window">
+					<div class="hero">
+						<img class="icon" src="./assets/gdoc.svg" alt="google docs logo">
+						<h1>Google Doc to WordPress <span style="color:var(--palette-accent-primary); font-weight: 700;">Formatter</span></h1>
+						<img class="icon" src="./assets/wp.svg" alt="wordpress docs logo">
+					</div>
+					
+					<div class="instructions">
+						<h2>How to use</h2>
+						<p class="instruction">You will interact with this web tool only from the keyboard. No mouse needed. </p>
+						<ol>
+							<li>Copy text from Google Doc</li>
+							<li>Press <span style="color:var(--palette-text-primary)">control + v</span> on this page</li>
+							<li>Press <span style="color:var(--palette-text-primary)">control + a</span> to select all</li>
+							<li>Press <span style="color:var(--palette-text-primary)">control + c</span> to copy to clipboard</li>
+							<li>Paste clipboard into the WP editor in <span style="color:var(--palette-text-primary)">text mode</span></li>
+						</ol>
+					</div>
+			</div>
+			</div>
 		</div>
 		<script src="main.js" type="module"></script>
 	</body>
