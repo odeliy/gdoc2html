@@ -21,7 +21,6 @@
 ::selection {
 	color: var(--palette-background-strong);
 	background: #ffdb58;
-	/* background: var(--palette-accent-primary); */
 }
 
 html {
@@ -31,11 +30,18 @@ html {
 body {
 	font-family: 'Inter', sans-serif;
 	background-color: var(--palette-background-faded);
-	min-height: 100vh;
 	display: flex;
-	align-items: center;
+	/* align-items: center; */
 	justify-content: center;
 	padding-inline: var(--gap-large);
+}
+
+a {
+	color: var(--palette-accent-secondary);
+}
+
+li {
+	margin-bottom: var(--gap-extra-small);
 }
 
 .icon {
@@ -43,6 +49,7 @@ body {
 }
 
 .app {
+	margin-block: var(--gap-large);
 	max-width: 800px;
 	min-width: 465px;
 	background-color: var(--palette-background-strong);
@@ -50,17 +57,15 @@ body {
 	border-radius: 10px;
 }
 
-.no-select {
-	user-select: none;
-}
-
 .title-bar {
-	text-align: center;
 	background-color: var(--palette-background-faded);
 	border: 1px solid var(--palette-background-strong);
 	border-radius: 10px 10px 0 0;
-	padding-inline: var(--gap-medium);
+	padding-inline: var(--gap-large);
 	padding-block: var(--gap-small);
+	display: flex;
+	justify-content: space-between;
+	color: var(--palette-text-secondary)
 }
 
 .main-window {
@@ -97,8 +102,57 @@ body {
 	margin-bottom: var(--gap-small);
 }
 
-.instructions ol li {
-	margin-bottom: var(--gap-extra-small);
+/************************/
+/* accordions ***********/
+/************************/
+.accordion {
+	margin-top: var(--gap-medium);
+}
+
+.accordion__content-box {
+	margin-top: var(--gap-small);
+	position: relative;
+}
+
+.accordion__label {
+	color: var(--palette-text-primary);
+	padding-block: var(--gap-extra-small);
+	padding-inline: var(--gap-small);
+	position: relative;
+	cursor: pointer;
+	background-color: var(--palette-background-faded);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.accordion__label h3 {
+	position: relative;
+	font-weight: 400;
+}
+
+.accordion__label::before {
+	content: attr('data-before');
+	position: absolute;
+	top: 50%;
+	transform: translateY(-55%);
+	right: var(--gap-medium);
+	font-size: 1.5rem;
+}
+
+.accordion__content {
+	position: relative;
+	padding-inline: var(--gap-small);
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition: all .3s ease-out;
+}
+
+.accordion__content-box.active .accordion__content {
+	padding-top: var(--gap-small);
+	max-height: 260px;
+	opacity: 1;
 }
 
 /************************/

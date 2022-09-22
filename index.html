@@ -9,27 +9,57 @@
 	</head>
 	<body>
 		<div class="app" id="app">
-			<div class="no-select">
-				<div class="title-bar">
-					<span style="color:var(--palette-text-secondary);">Convert rich text <span style="color:var(--palette-accent-secondary);">cleanly</span></span>
-				</div>
-				<div class="main-window">
-					<div class="hero">
-						<img class="icon" src="./assets/gdoc.svg" alt="google docs logo">
-						<h1>Google Doc to WordPress <span style="color:var(--palette-accent-primary); font-weight: 700;">Formatter</span></h1>
-						<img class="icon" src="./assets/wp.svg" alt="wordpress docs logo">
-					</div>
-					
-					<div class="instructions">
-						<h2>How to use</h2>
-						<p class="instruction">On first run, your browser may ask to allow clipboard access. You will need to accept for this tool to work.</p>
-						<ol>
-							<li>Copy text from Google Doc</li>
-							<li>Press <span style="color:var(--palette-text-primary)">control + v</span> on this page (or command + v for MacOs)</li>
-							<li>Paste clipboard into the WP editor in <span style="color:var(--palette-text-primary)">text mode</span></li>
-						</ol>
-					</div>
+			<div class="title-bar">
+				<!-- <p><span style="color:var(--palette-text-secondary);">Convert rich text <span style="color:var(--palette-accent-secondary);">cleanly</span></p> -->
+				<p>gdoc2wp</p>
+				<p>v1.0.0</p>
+
 			</div>
+			<div class="main-window">
+				<div class="hero">
+					<img class="icon" src="./assets/gdoc.svg" alt="google docs logo">
+					<h1>Google Doc to WordPress <span style="color:var(--palette-accent-primary); font-weight: 700;">Formatter</span></h1>
+					<img class="icon" src="./assets/wp.svg" alt="wordpress docs logo">
+				</div>
+					
+				<div class="instructions">
+					<h2>How to use</h2>
+					<p class="instruction">On first run, your browser may ask to allow clipboard access. You will need to accept for this tool to work.</p>
+					<ol>
+						<li>Copy text from Google Docs.</li>
+						<li>Press <span style="color:var(--palette-text-primary)">control + v</span> on this page (or command + v for MacOs). The formatter will run automatically and replace the rich text in your clipboard with a cleaned up html version that WP can use.</li>
+						<li>Paste clipboard into the WP editor in <span style="color:var(--palette-text-primary)">text mode</span>. At first it will appear as a ugly blob of text, but if you swith to visual mode it will re-structure and subsequent text-mode views will now appear correct.</li>
+						<li>Especially important - <span style="color: var(--palette-text-primary)">double check the work!</span> This is a new tool. There will be bugs and quirks to discover. Use catiously at first.</li>
+					</ol>
+					
+					<div class="accordion">
+						<div class="accordion__content-box">
+							<div class="accordion__label">
+								<h3>Problems this solves</h3>
+							</div>
+							<div class="accordion__content">
+								<ul id="problemsContent">
+									<li>Removes span tags</li>
+									<li>Removes aria attributes on list items</li>
+									<li>Removes strong tags applied to headers</li>
+									<li>Removes extra carriage returns</li>
+									<li>Keeps bolds and italics intact</li>
+									<li>Automatically opens external links in new tabs</li>
+									<li>Pre-formats tables (coming soon)</li>
+									<li>Option to auto insert ToC shortcode (coming soon)</li>
+								</ul>
+							</div>
+						</div>
+						<div class="accordion__content-box">
+							<div class="accordion__label">
+								<h3>Error reporting</h3>
+							</div>
+							<div class="accordion__content">
+								<p id="errorsContent">Something strange happen? Please report it so it can be fixed. Slack <a href="https://app.slack.com/client/T029AV3QX/D03SQDP3DQQ/rimeto_profile/U03S357E20L">Cody Iott</a> a copy of the Google doc and possibly take a screenshot.</p>
+							</div>	
+						</div>	
+					</div>
+				</div>
 			</div>
 		</div>
 		<script src="main.js" type="module"></script>
