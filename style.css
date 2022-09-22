@@ -43,6 +43,7 @@ body {
 }
 
 .app {
+	max-width: 800px;
 	min-width: 465px;
 	background-color: var(--palette-background-strong);
 	box-shadow: var(--palette-background-strong) 2px 5px 10px;
@@ -75,6 +76,7 @@ body {
 .hero h1 {
 	font-weight: 400;
 	text-align: center;
+	padding-inline: var(--gap-small);
 }
 
 .instructions {
@@ -102,12 +104,8 @@ body {
 /************************/
 /* classes come from js */
 /************************/
-.code-container,
 .copied {
-	padding: var(--gap-small);
-}
-
-.copied {
-    color: var(--palette-text-secondary);
-	padding-top: unset;
+	color: var(--palette-text-secondary);
+	padding-inline: var(--gap-large);
+	padding-bottom: var(--gap-large);
 }

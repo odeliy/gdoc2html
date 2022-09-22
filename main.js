@@ -2,7 +2,7 @@ import { formatLinks, removeTag, stripTagAttributes, swapTags } from './formatte
 import { detectBold, detectItalic } from './detectors.js'
 
 let app = document.getElementById('app')
-let landingPageHtml =  ''
+let pageHTML =  ''
 
 function formatHTML(input) {
 	let newString = ''
@@ -26,33 +26,24 @@ function pasteClipboard(event) {
 	let originalHTML = event.clipboardData.getData('text/html')
 	let formattedHTML = formatHTML(originalHTML)
 
-	let codeContainer = document.createElement('div')
-	codeContainer.classList.add('code-container')
-	codeContainer.innerText = formattedHTML
-
-	app.innerHTML = ''
-	app.appendChild(codeContainer)
+	navigator.clipboard.writeText(formattedHTML)
+		.then(() => {
+			let copiedMessage = document.createElement('div')
+			copiedMessage.classList.add('copied')
+			copiedMessage.classList.add('no-select')
+			copiedMessage.innerHTML = `
+			<p><span style="color: var(--palette-accent-secondary); font-size: 2rem; display: block;">Success!</span> Clipboard conversion complete. Press <span style="color: var(--palette-text-primary)">enter</span> to reset or just paste again.</p>
+			`
+			app.appendChild(copiedMessage)
+		})
 }
 
-window.addEventListener('paste', (e) => {
-	landingPageHtml = app.innerHTML
-	pasteClipboard(e)
-})
+window.addEventListener('load', () => pageHTML = app.innerHTML)
 
-window.addEventListener('copy', () => {
-	let copiedMessage = document.createElement('div')
-	copiedMessage.classList.add('copied')
-	copiedMessage.classList.add('no-select')
-	copiedMessage.innerText =
-	'Copied! Press enter to reset or just paste again.'
-	if(landingPageHtml !== '') {
-		app.appendChild(copiedMessage)
-	}
-})
+window.addEventListener('paste', (e) => pasteClipboard(e))
 
 window.addEventListener('keypress', (e) => {
 	if (e.key === 'Enter') {
-		app.innerHTML = landingPageHtml
-		landingPageHtml = ''
+		app.innerHTML = pageHTML
 	}
 })
