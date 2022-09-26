@@ -31,7 +31,6 @@ body {
 	font-family: 'Inter', sans-serif;
 	background-color: var(--palette-background-faded);
 	display: flex;
-	/* align-items: center; */
 	justify-content: center;
 	padding-inline: var(--gap-large);
 }
@@ -42,6 +41,21 @@ a {
 
 li {
 	margin-bottom: var(--gap-extra-small);
+}
+
+/* bold */
+.--b {
+	font-weight: 700;
+}
+
+/* primary blue */
+.--pb {
+	color: var(--palette-accent-primary);
+}
+
+/* primary text */
+.--pt {
+	color: var(--palette-text-primary);
 }
 
 .icon {
