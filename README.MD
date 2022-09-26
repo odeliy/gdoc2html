@@ -16,8 +16,6 @@ It also formats hyperlinks so that all external going links open in a new tab, w
 
 - pre-format tables
 - option to auto insert ToC shortcode
-- auto remove html comments (?)
-- remove double carriage returns (?)
 
 ## Deployment
 
@@ -32,18 +30,8 @@ From your command line, first clone this repo:
 $ git clone https://github.com/odeliy/gdoc2wp
 
 # Go into the repository
-$ cd autofill-jumplinks
+$ cd gdoc2wp
 
 # Remove current origin repository
 $ git remote remove origin
-```
-
-Then you can install the dependencies using NPM:
-
-```bash
-# Install dependencies
-$ npm install
-
-# Start development server
-$ npm start
 ```
