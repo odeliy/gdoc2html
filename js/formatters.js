@@ -67,13 +67,11 @@ export function stripTagAttributes(input) {
 		if (input[i] === '<') {
 			newString += input[i]
 
-            let inLink = detectFor(input, i, 'a href')
+			let inLink = detectFor(input, i, 'a href')
 			if (!inLink) {
 				inCoreTag = true
 			}
-		} 
-        
-        else if (inCoreTag) {
+		} else if (inCoreTag) {
 			if (input[i] !== ' ' && input[i] !== '>') {
 				newString += input[i]
 			} else if (input[i] === '>') {
@@ -83,16 +81,12 @@ export function stripTagAttributes(input) {
 				inCoreTag = false
 				inAttributesArea = true
 			}
-		} 
-        
-        else if (inAttributesArea) {
+		} else if (inAttributesArea) {
 			if (input[i] === '>') {
 				newString += input[i]
 				inAttributesArea = false
 			}
-		} 
-        
-        else {
+		} else {
 			newString += input[i]
 		}
 	}
@@ -100,56 +94,51 @@ export function stripTagAttributes(input) {
 	return newString
 }
 
-export function formatLinks(input) {
+export function formatLinks(input, websiteName) {
+	function extractUrl(input, startIndex) {
+		let fullTag = ''
+		let url = ''
 
-    function extractUrl(input, startIndex) {
-        let fullTag = ''
-        let url = ''
+		for (let i = startIndex; i < input.length; i++) {
+			fullTag += input[i]
+			if (input[i] === '>') break
+		}
 
-        for (let i = startIndex; i < input.length; i++) {
-            fullTag += input[i]
-            if (input[i] === '>') break
-        }
+		url = fullTag.split('"')
 
-        url = fullTag.split('"')
+		return url[1]
+	}
 
-        return url[1]
-    }
+	let newString = ''
+	let url = ''
+	let isLink = false
+	let isInternalLink = false
 
-    let newString = ''
-    let url = ''
-    let isLink = false
-    let isInternalLink = false
+	for (let i = 0; i < input.length; i++) {
+		if (input[i] === '<') {
+			newString += input[i]
+			isLink = detectFor(input, i, 'a href')
 
-    for (let i = 0; i < input.length; i++) {
-        if (input[i] === '<') {
-            newString += input[i]
-            isLink = detectFor(input, i, 'a href')
+			if (isLink) {
+				url = extractUrl(input, i)
+			}
+		} else if (isLink) {
+			if (input[i] === '>') {
+				newString += 'a href="'
+				newString += url + '" '
 
-            if(isLink) {
-                url = extractUrl(input, i)
-            }
-        }
+				isInternalLink = detectFor(url, 0, websiteName)
+				if (!isInternalLink) {
+					newString += 'target="_blank" rel="noopener"'
+				}
 
-        else if (isLink) {
-            if (input[i] === '>') {
-                newString += 'a href="'
-                newString += url + '" '
+				newString += '>'
+				isLink = false
+			}
+		} else {
+			newString += input[i]
+		}
+	}
 
-                isInternalLink = detectFor(url, 0, 'bankrate')
-                if(!isInternalLink) {
-                    newString += 'target="_blank" rel="noopener"'
-                }
-
-                newString += '>'
-                isLink = false
-            }
-        }
-
-        else {
-            newString += input[i]
-        }
-    }
-    
-    return newString
+	return newString
 }

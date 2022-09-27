@@ -62,6 +62,10 @@ li {
 	max-width: 80px;
 }
 
+p {
+	margin-bottom: var(--gap-small);
+}
+
 .app {
 	margin-block: var(--gap-large);
 	max-width: 800px;
@@ -86,10 +90,13 @@ li {
 	padding: var(--gap-medium);
 }
 
+/************************/
+/* Hero section *********/
+/************************/
 .hero {
 	display: flex;
 	align-items: center;
-	margin-bottom: var(--gap-medium);
+	padding-inline: var(--gap-medium);
 }
 
 .hero h1 {
@@ -98,28 +105,28 @@ li {
 	padding-inline: var(--gap-small);
 }
 
-.instructions {
-	/* background-color: var(--palette-background-faded); */
-	color: var(--palette-text-secondary);
-	min-height: 100px;
-	border-radius: 10px;
+/************************/
+/* Settings *************/
+/************************/
+.settings {
 	padding-inline: var(--gap-medium);
-	padding-block: var(--gap-small);
+	margin-top: var(--gap-medium);
 }
 
-.instructions h2 {
-	color: var(--palette-text-primary);
+.settings h2 {
 	margin-bottom: var(--gap-small);
 }
 
-.instruction {
-	margin-bottom: var(--gap-small);
+.settings h3 {
+	font-weight: 400;
 }
 
 /************************/
-/* accordions ***********/
+/* Accordion ************/
 /************************/
 .accordion {
+	color: var(--palette-text-secondary);
+	padding-inline: var(--gap-medium);
 	margin-top: var(--gap-medium);
 }
 
@@ -142,7 +149,8 @@ li {
 
 .accordion__label h3 {
 	position: relative;
-	font-weight: 400;
+	font-weight: 700;
+	user-select: none;
 }
 
 .accordion__label::before {
@@ -165,7 +173,8 @@ li {
 
 .accordion__content-box.active .accordion__content {
 	padding-top: var(--gap-small);
-	max-height: 260px;
+	/* set max-height as low as possible for best animation */
+	max-height: 390px;
 	opacity: 1;
 }
 

@@ -64,5 +64,5 @@ export function detectFor(input, startIndex, pattern) {
 		if (input[i] === '>') break
 	}
 
-	return testedTag.indexOf(pattern) > -1 ? true : false	
+	return testedTag.indexOf(pattern) > -1 ? true : false
 }
