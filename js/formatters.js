@@ -147,6 +147,21 @@ export function insertToC(input, settingsVal) {
 	let newString = ''
 	let inTargetTag = false
 
+	function checkForBottomLine(input, index) {
+		let headerString = ''
+
+		for (let i = index + 1; i < input.length; i++) {
+			if (input[i] !== '<') {
+				headerString += input[i]
+			}
+			else {
+				break
+			}
+		}
+
+		return detectFor(headerString.toLowerCase(), 0, 'bottom line')
+	}
+
 	for (let i = 0; i < input.length; i++) {
 		if (input[i] === '<') {
 			inTargetTag = detectOpeningTag(settingsVal, input, i)
@@ -155,7 +170,11 @@ export function insertToC(input, settingsVal) {
 
 		else if(input[i] === '>' && inTargetTag) {
 			inTargetTag = false
-			newString += '>[su_bookmark id=""]'
+			if (checkForBottomLine(input, i)) {
+				newString += '>'
+			} else {
+				newString += '>[su_bookmark id=""]'
+			}
 		}
 
 		else {
@@ -164,6 +183,5 @@ export function insertToC(input, settingsVal) {
 	}
 
 	console.log(newString)
-
 	return newString
 }
