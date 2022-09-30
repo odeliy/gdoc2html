@@ -1,4 +1,4 @@
-import { detectFor, detectTag } from './detectors.js'
+import { detectFor, detectOpeningTag, detectTag } from './detectors.js'
 
 export function removeTag(input, tagName) {
 	let newString = ''
@@ -139,6 +139,31 @@ export function formatLinks(input, websiteName) {
 			newString += input[i]
 		}
 	}
+
+	return newString
+}
+
+export function insertToC(input, settingsVal) {
+	let newString = ''
+	let inTargetTag = false
+
+	for (let i = 0; i < input.length; i++) {
+		if (input[i] === '<') {
+			inTargetTag = detectOpeningTag(settingsVal, input, i)
+			newString += input[i]
+		}
+
+		else if(input[i] === '>' && inTargetTag) {
+			inTargetTag = false
+			newString += '>[su_bookmark id=""]'
+		}
+
+		else {
+			newString += input[i]
+		}
+	}
+
+	console.log(newString)
 
 	return newString
 }

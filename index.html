@@ -11,7 +11,7 @@
 		<div class="app" id="app">
 			<div class="title-bar">
 				<span>gdoc2wp</span>
-				<span>v1.1.0</span>
+				<span>v1.2.0</span>
 			</div>
 
 			<div class="main-window">
@@ -24,11 +24,21 @@
 				</div>
 
 				<div class="settings">
-					<label for="website">Internal links:</label><br />
-					<select name="website" id="website">
-						<option value="bankrate.com">bankrate.com</option>
-						<option value="creditcards.com">creditcards.com</option>
-					</select>
+					<div class="settings__setting">
+						<label for="website">Internal links:</label><br />
+						<select name="website" id="website">
+							<option value="bankrate.com">bankrate.com</option>
+							<option value="creditcards.com">creditcards.com</option>
+						</select>
+					</div>
+					<div class="settings__setting">
+						<label for="ToC">ToC:</label><br />
+						<select name="ToC" id="ToC">
+							<option value="off">off</option>
+							<option value="h2">h2</option>
+							<option value="h3">h3</option>
+						</select>
+					</div>
 				</div>
 
 				<div class="accordion">
@@ -71,8 +81,8 @@
 								<li>Removes extra carriage returns</li>
 								<li>Keeps bolds and italics intact</li>
 								<li>Automatically opens external links in new tabs</li>
+								<li>Option to auto insert ToC shortcode</li>
 								<li>Pre-formats tables (coming soon)</li>
-								<li>Option to auto insert ToC shortcode (coming soon)</li>
 							</ul>
 						</div>
 					</div>

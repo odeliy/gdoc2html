@@ -1,11 +1,12 @@
 import {
 	formatLinks,
+	insertToC,
 	removeTag,
 	stripTagAttributes,
 	swapTags,
 } from './js/formatters.js'
 import { detectBold, detectItalic } from './js/detectors.js'
-import { setupAccorion, setupSettings } from './js/helpers.js'
+import { fetchStorage, setupAccorion, setupSettings } from './js/helpers.js'
 import { copiedHTML } from './js/copiedHTML.js'
 
 const app = document.getElementById('app')
@@ -23,7 +24,8 @@ function formatHTML(input) {
 	newString = swapTags(newString, 'span', 'em', detectItalic)
 	newString = removeTag(newString, 'span')
 	newString = stripTagAttributes(newString)
-	newString = formatLinks(newString, fetchSelectedWebsite())
+	newString = formatLinks(newString, fetchStorage('website', 'bankrate.com'))
+	newString = insertToC(newString, fetchStorage('ToC', 'off'))
 	return newString
 }
 
@@ -46,9 +48,6 @@ window.addEventListener('load', () => {
 	setupSettings()
 })
 
-// initiate the whole show on paste
-window.addEventListener('paste', (e) => pasteClipboard(e))
-
 // reset page by pressing enter
 window.addEventListener('keypress', (e) => {
 	if (e.key === 'Enter') {
@@ -57,3 +56,6 @@ window.addEventListener('keypress', (e) => {
 		setupSettings()
 	}
 })
+
+// initiate the whole show on paste
+window.addEventListener('paste', (e) => pasteClipboard(e))

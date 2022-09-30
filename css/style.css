@@ -83,7 +83,7 @@ p {
 	padding-block: var(--gap-small);
 	display: flex;
 	justify-content: space-between;
-	color: var(--palette-text-secondary)
+	color: var(--palette-text-secondary);
 }
 
 .main-window {
@@ -108,17 +108,23 @@ p {
 /************************/
 /* Settings *************/
 /************************/
+select:focus {
+	outline: none;
+}
+
 .settings {
 	padding-inline: var(--gap-medium);
-	margin-top: var(--gap-medium);
+	margin-block: var(--gap-large);
+	display: flex;
+	gap: var(--gap-small);
 }
 
-.settings h2 {
-	margin-bottom: var(--gap-small);
+.settings__setting {
+	border: 1px solid white;
 }
 
-.settings h3 {
-	font-weight: 400;
+.settings label {
+	padding-left: 4px;
 }
 
 /************************/
@@ -168,7 +174,7 @@ p {
 	max-height: 0;
 	opacity: 0;
 	overflow: hidden;
-	transition: all .3s ease-out;
+	transition: all 0.3s ease-out;
 }
 
 .accordion__content-box.active .accordion__content {

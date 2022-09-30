@@ -8,17 +8,24 @@ export function setupAccorion() {
 	}
 }
 
-function fetchSelectedWebsite() {
-	return localStorage.getItem('website') || 'bankrate.com'
+export function fetchStorage(key, fallback) {
+	return localStorage.getItem(key) || fallback
 }
 
 export function setupSettings() {
-	const websiteSelect = document.getElementById('website')
-	
-	websiteSelect.addEventListener('change', () => {
-		let newValue = websiteSelect.value
+	const web = document.getElementById('website')
+	const ToC = document.getElementById('ToC')
+
+	web.addEventListener('change', () => {
+		let newValue = web.value
 		localStorage.setItem('website', newValue)
 	})
 	
-	websiteSelect.value = fetchSelectedWebsite()
+	ToC.addEventListener('change', () => {
+		let newValue = ToC.value
+		localStorage.setItem('ToC', newValue)
+	})
+	
+	web.value = fetchStorage('website', 'bankrate.com')
+	ToC.value = fetchStorage('ToC', 'off')
 }

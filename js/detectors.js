@@ -23,6 +23,25 @@ export function detectTag(tagName, input, startIndex) {
 	return openingTag || closingTag ? true : false
 }
 
+export function detectOpeningTag(tagName, input, startIndex) {
+	if (input[startIndex] !== '<') {
+		console.log('detectTag() error: not a tag')
+		return
+	}
+
+	let testedTag = ''
+
+	for (let i = startIndex + 1; i < input.length; i++) {
+		if (input[i] !== ' ' && input[i] !== '>') {
+			testedTag += input[i]
+		} else {
+			break
+		}
+	}
+
+	return testedTag === tagName ? true : false
+}
+
 export function detectBold(input, startIndex) {
 	function checkFontWeight(i) {
 		// indexOf returns -1 if string not found
