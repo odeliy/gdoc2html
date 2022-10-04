@@ -1,5 +1,6 @@
 import {
 	formatLinks,
+	formatTables,
 	insertToC,
 	removeTag,
 	stripTagAttributes,
@@ -26,6 +27,7 @@ function formatHTML(input) {
 	newString = stripTagAttributes(newString)
 	newString = formatLinks(newString, fetchStorage('website', 'bankrate.com'))
 	newString = insertToC(newString, fetchStorage('ToC', 'off'))
+	newString = formatTables(newString)
 	return newString
 }
 
@@ -57,5 +59,5 @@ window.addEventListener('keypress', (e) => {
 	}
 })
 
-// initiate the whole show on paste
+// this starts all the action
 window.addEventListener('paste', (e) => pasteClipboard(e))

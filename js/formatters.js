@@ -181,7 +181,104 @@ export function insertToC(input, settingsVal) {
 			newString += input[i]
 		}
 	}
+	return newString
+}
 
-	console.log(newString)
+export function formatTables(input) {
+	let newTable = ''
+	let inTableTag = false
+	let inTable = false
+
+	// 1. store full table in newTable
+	for (let i = 0; i < input.length; i++) {
+		if (input[i] === '<') {
+			inTableTag = detectTag('table', input, i)
+			if(inTableTag) {
+				if(!inTable) { // opening tag
+					inTable = true
+				} else {	// closing tag
+					newTable += '</table>'
+					inTable = false
+				}
+			}
+		}
+		if(inTable) {
+			newTable += input[i]
+		}
+	}
+
+	// 2. Format into desired string
+	let tableHeaderContent = ''
+	let firstRow = false
+
+	newTable = newTable.split(/(<tr>)/)
+	newTable.forEach(item => {
+		if(detectTag('td', item, 0) && !firstRow) {
+			firstRow = true
+			tableHeaderContent = item
+		}
+	})
+
+	// 2.1 replace <td> tags with <th>
+	let newTableHeaderContent = ''
+	let inTargetTag = false
+	let nextTagFlagged = false
+
+	for (let i = 0; i < tableHeaderContent.length; i++) {
+		if (tableHeaderContent[i] === '<') {
+			inTargetTag = detectTag('td', tableHeaderContent, i)
+			if (!inTargetTag) {
+				newTableHeaderContent += tableHeaderContent[i]
+			}
+		}
+
+		else if (inTargetTag && !nextTagFlagged) {
+			if (tableHeaderContent[i] === '>') {
+				newTableHeaderContent += '<th>'
+				inTargetTag = false
+				nextTagFlagged = true
+			}
+		}
+
+		else if (inTargetTag && nextTagFlagged) {
+			if (tableHeaderContent[i] === '>') {
+				newTableHeaderContent += '</th>'
+				inTableTag = false
+				nextTagFlagged = false
+			}
+		}
+
+		else {
+			newTableHeaderContent += tableHeaderContent[i]
+		}
+	}
+	
+	newTable[0] = '<table class="table"><thead>'
+	newTable[2] = newTableHeaderContent
+	newTable[3] = '</thead><tbody><tr>'
+	newTable = newTable.join('')
+
+	// 3. replace old table with new table
+	let newString = ''
+	for (let i = 0; i < input.length; i++) {
+		if (input[i] === '<') {
+			inTableTag = detectTag('table', input, i)
+			if(inTableTag) {
+				if(!inTable) { // opening tag
+					inTable = true
+				} else {	// closing tag
+					inTable = false
+					newString += newTable
+				}
+			} else if (!inTable) {
+				newString += '<'
+			}
+		} else if (!inTable) {
+			newString += input[i]
+		}
+	}
+
+	newString = newString.slice(0, -7)
+
 	return newString
 }
