@@ -12,20 +12,41 @@ export function fetchStorage(key, fallback) {
 	return localStorage.getItem(key) || fallback
 }
 
-export function setupSettings() {
-	const web = document.getElementById('website')
-	const ToC = document.getElementById('ToC')
+export function setupToggle() {
+	const toggleSwitchOuter = document.getElementById('toggleSwitchOuter')
+	const toggleSwitchInner = document.getElementById('toggleSwitchInner')
+	const toggleBR = document.getElementById('toggleBR')
+	const toggleCC = document.getElementById('toggleCC')
 
-	web.addEventListener('change', () => {
-		let newValue = web.value
-		localStorage.setItem('website', newValue)
-	})
-	
-	ToC.addEventListener('change', () => {
-		let newValue = ToC.value
-		localStorage.setItem('ToC', newValue)
-	})
-	
-	web.value = fetchStorage('website', 'bankrate.com')
-	ToC.value = fetchStorage('ToC', 'off')
+	let websiteSelected = fetchStorage('website', 'bankrate.com')
+
+	if (websiteSelected === 'bankrate.com') {
+		toggleSwitchInner.classList.remove('flip-toggle')
+		toggleBR.classList.add('selected')
+		toggleCC.classList.remove('selected')
+	} else {
+		// creditcards.com is selected
+		toggleSwitchInner.classList.add('flip-toggle')
+		toggleBR.classList.remove('selected')
+		toggleCC.classList.add('selected')
+	}
+
+	// toggle local storage and visual indicator between br.com and cc.com
+	toggleSwitchOuter.addEventListener('click', () => setWebsite())
+}
+
+export function setWebsite() {
+	let websiteSelected = fetchStorage('website', 'bankrate.com')
+
+	if (websiteSelected === 'bankrate.com') {
+		toggleSwitchInner.classList.add('flip-toggle')
+		toggleBR.classList.remove('selected')
+		toggleCC.classList.add('selected')
+		localStorage.setItem('website', 'creditcards.com')
+	} else {
+		toggleSwitchInner.classList.remove('flip-toggle')
+		toggleBR.classList.add('selected')
+		toggleCC.classList.remove('selected')
+		localStorage.setItem('website', 'bankrate.com')
+	}
 }

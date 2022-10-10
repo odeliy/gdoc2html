@@ -75,6 +75,9 @@ p {
 	border-radius: 10px;
 }
 
+/************************/
+/* Title bar ************/
+/************************/
 .title-bar {
 	background-color: var(--palette-background-faded);
 	border: 1px solid var(--palette-background-strong);
@@ -86,6 +89,38 @@ p {
 	color: var(--palette-text-secondary);
 }
 
+.toggle__section {
+	display: flex;
+	align-items: center;
+	gap: var(--gap-extra-small);
+}
+
+.toggle__outer {
+	width: 50px;
+	height: 25px;
+	border-radius: 25px;
+	background-color: var(--palette-background-strong);
+	display: flex;
+}
+
+.toggle__inner {
+	width: 25px;
+	height: 25px;
+	border-radius: 25px;
+	background-color: var(--palette-text-secondary);
+}
+
+.flip-toggle {
+	margin-left: auto; /* switch right */
+}
+
+.selected {
+	color: var(--palette-text-primary);
+}
+
+/************************/
+/* Main window **********/
+/************************/
 .main-window {
 	padding: var(--gap-medium);
 }
@@ -106,25 +141,17 @@ p {
 }
 
 /************************/
-/* Settings *************/
+/* How to use ***********/
 /************************/
-select:focus {
-	outline: none;
-}
-
-.settings {
+.how-to {
+	color: var(--palette-text-secondary);
+	padding-top: var(--gap-medium);
 	padding-inline: var(--gap-medium);
-	margin-block: var(--gap-large);
-	display: flex;
-	gap: var(--gap-small);
 }
 
-.settings__setting {
-	border: 1px solid white;
-}
-
-.settings label {
-	padding-left: 4px;
+.how-to h2 {
+	color: var(--palette-text-primary);
+	padding-bottom: var(--gap-small);
 }
 
 /************************/
@@ -180,7 +207,7 @@ select:focus {
 .accordion__content-box.active .accordion__content {
 	padding-top: var(--gap-small);
 	/* set max-height as low as possible for best animation */
-	max-height: 390px;
+	max-height: 285px;
 	opacity: 1;
 }
 

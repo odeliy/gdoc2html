@@ -1,17 +1,14 @@
 import {
 	formatLinks,
-	formatTables,
-	insertToC,
 	removeTag,
 	stripTagAttributes,
 	swapTags,
 } from './js/formatters.js'
 import { detectBold, detectItalic } from './js/detectors.js'
-import { fetchStorage, setupAccorion, setupSettings } from './js/helpers.js'
+import { fetchStorage, setupAccorion, setupToggle } from './js/helpers.js'
 import { copiedHTML } from './js/copiedHTML.js'
 
 const app = document.getElementById('app')
-let pageHTML = ''
 
 function formatHTML(input) {
 	let newString = ''
@@ -25,9 +22,7 @@ function formatHTML(input) {
 	newString = swapTags(newString, 'span', 'em', detectItalic)
 	newString = removeTag(newString, 'span')
 	newString = stripTagAttributes(newString)
-	newString = formatLinks(newString, fetchStorage('website', 'bankrate.com'))
-	newString = insertToC(newString, fetchStorage('ToC', 'off'))
-	newString = formatTables(newString)
+	newString = formatLinks(newString, fetchStorage('website'))
 	return newString
 }
 
@@ -45,17 +40,17 @@ function pasteClipboard(event) {
 }
 
 window.addEventListener('load', () => {
-	pageHTML = app.innerHTML
 	setupAccorion()
-	setupSettings()
+	setupToggle()
+	localStorage.setItem('initialAppHTML', app.innerHTML)
 })
 
 // reset page by pressing enter
 window.addEventListener('keypress', (e) => {
 	if (e.key === 'Enter') {
-		app.innerHTML = pageHTML
+		app.innerHTML = localStorage.getItem('initialAppHTML')
 		setupAccorion()
-		setupSettings()
+		setupToggle()
 	}
 })
 
