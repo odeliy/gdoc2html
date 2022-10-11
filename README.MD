@@ -12,14 +12,9 @@ This web app formats rich text from Google Docs into html that can be pasted cle
 
 It also formats hyperlinks so that all external going links open in a new tab, whereas internal links do not.
 
-## Upcoming features...
-
-- pre-format tables
-- option to auto insert ToC shortcode
-
 ## Deployment
 
-A live version of this repo is available on [Netlify](https://jocular-peony-b076c1.netlify.app/)
+A live version of this repo is available on [Netlify](https://gdoc2wp.netlify.app/)
 
 ## Getting started
 
@@ -34,4 +29,23 @@ $ cd gdoc2wp
 
 # Remove current origin repository
 $ git remote remove origin
+```
+
+Then you can install the dependencies using NPM:
+
+```bash
+# Install dependencies
+$ npm install
+
+# Start development server
+$ npm start
+```
+
+A `.prettierrc.json` config file is included for consistent styling. If using VS Code, install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and then right click > format document. Or for a better approch create a folder `.vscode` and a file inside `settings.json`. Include the following in the file:
+
+```bash
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+}
 ```

@@ -1,93 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./css/style.css" />
-		<title>gdoc2wp</title>
-	</head>
-	<body>
-		<div class="app" id="app">
-			<div class="title-bar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>gdoc2wp</title>
+  </head>
+  <body>
+    <div class="app" id="app">
+      <div class="title-bar">
+        <div class="toggle__section">
+          <span class="selected" id="toggleBR">BR</span>
+          <div class="toggle__outer" id="toggleSwitchOuter">
+            <div class="toggle__inner" id="toggleSwitchInner"></div>
+          </div>
+          <span id="toggleCC">CC</span>
+        </div>
 
-				<div class="toggle__section">
-					<span class="selected" id="toggleBR">BR</span>
-					<div class="toggle__outer" id="toggleSwitchOuter">
-						<div class="toggle__inner" id="toggleSwitchInner"></div>
-					</div>
-					<span id="toggleCC">CC</span>
-				</div>
+        <span><a href="https://github.com/odeliy/gdoc2wp" target="_blank">github</a></span>
+      </div>
 
-				<span>v1.4.1</span>
-			</div>
+      <div class="main-window">
+        <div class="hero">
+          <img class="icon" src="./assets/gdoc.svg" alt="google docs logo" />
+          <h1>Google Doc to WordPress <span class="--pb --b">Formatter</span></h1>
+          <img class="icon" src="./assets/wp.svg" alt="wordpress docs logo" />
+        </div>
 
-			<div class="main-window">
-				<div class="hero">
-					<img class="icon" src="./assets/gdoc.svg" alt="google docs logo" />
-					<h1>
-						Google Doc to WordPress <span class="--pb --b">Formatter</span>
-					</h1>
-					<img class="icon" src="./assets/wp.svg" alt="wordpress docs logo" />
-				</div>
+        <div class="how-to">
+          <h2>How to use</h2>
+          <p>
+            On first run, your browser may ask to allow clipboard access. You will need to accept for this tool to work.
+          </p>
+          <ol>
+            <li>Copy text from Google Docs.</li>
+            <li>
+              Press <span class="--pt">control + v</span> on this page (or command + v for MacOs). The formatter will
+              run automatically and replace the rich text in your clipboard with a cleaned up html version that WP can
+              use.
+            </li>
+            <li>
+              Paste clipboard into the WP editor in
+              <span class="--pt">text mode</span>. At first it will appear as an ugly blob of text, but if you swith to
+              visual mode it will re-structure and subsequent text-mode views will now appear correct.
+            </li>
+          </ol>
+        </div>
 
-				<div class="how-to">
-					<h2>How to use</h2>
-					<p>
-						On first run, your browser may ask to allow clipboard access.
-						You will need to accept for this tool to work.
-					</p>
-					<ol>
-						<li>Copy text from Google Docs.</li>
-						<li>
-							Press <span class="--pt">control + v</span> on this page (or
-							command + v for MacOs). The formatter will run automatically
-							and replace the rich text in your clipboard with a cleaned up
-							html version that WP can use.
-						</li>
-						<li>
-							Paste clipboard into the WP editor in
-							<span class="--pt">text mode</span>. At first it will appear
-							as an ugly blob of text, but if you swith to visual mode it
-							will re-structure and subsequent text-mode views will now
-							appear correct.
-						</li>
-					</ol>
-				</div>
-
-				<div class="accordion">
-					<div class="accordion__content-box">
-						<div class="accordion__label">
-							<h3>Problems this solves</h3>
-						</div>
-						<div class="accordion__content">
-							<ul id="problemsContent">
-								<li>Removes unnecessary tags and attributes</li>
-								<li>Removes strong tags applied to headers</li>
-								<li>Keeps bolds and italics intact</li>
-								<li>Automatically opens external links in new tabs</li>
-							</ul>
-						</div>
-					</div>
-					<div class="accordion__content-box">
-						<div class="accordion__label">
-							<h3>Error reporting</h3>
-						</div>
-						<div class="accordion__content">
-							<p id="errorsContent">
-								Something strange happen? Please report it so it can be fixed.
-								Slack
-								<a
-									href="https://app.slack.com/client/T029AV3QX/D03SQDP3DQQ/rimeto_profile/U03S357E20L"
-									>Cody Iott</a
-								>
-								a copy of the Google doc and possibly take a screenshot.
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script src="main.js" type="module"></script>
-	</body>
+        <div class="accordion">
+          <div class="accordion__content-box">
+            <div class="accordion__label">
+              <h3>Problems this solves</h3>
+            </div>
+            <div class="accordion__content">
+              <ul id="problemsContent">
+                <li>Removes unnecessary tags and attributes</li>
+                <li>Removes strong tags applied to headers</li>
+                <li>Keeps bolds and italics intact</li>
+                <li>Automatically opens external links in new tabs</li>
+              </ul>
+            </div>
+          </div>
+          <div class="accordion__content-box">
+            <div class="accordion__label">
+              <h3>Error reporting</h3>
+            </div>
+            <div class="accordion__content">
+              <p id="errorsContent">
+                Something strange happen? Please report it so it can be fixed. Slack
+                <a href="https://app.slack.com/client/T029AV3QX/D03SQDP3DQQ/rimeto_profile/U03S357E20L">Cody Iott</a>
+                a copy of the Google doc and possibly take a screenshot.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js" type="module"></script>
+  </body>
 </html>
