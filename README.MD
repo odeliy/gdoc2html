@@ -36,9 +36,6 @@ Then you can install the dependencies using NPM:
 ```bash
 # Install dependencies
 $ npm install
-
-# Start development server
-$ npm start
 ```
 
 A `.prettierrc.json` config file is included for consistent styling. If using VS Code, install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and then right click > format document. Or for a better approch create a folder `.vscode` and a file inside `settings.json`. Include the following in the file:
