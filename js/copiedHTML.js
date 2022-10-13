@@ -1,1 +1,0 @@
-export const copiedHTML = `<p><span style="color: var(--palette-accent-secondary); font-size: 2rem; display: block;">Success!</span> Clipboard conversion complete. Press <span style="color: var(--palette-text-primary)">enter</span> to reset or just paste again.</p>`
