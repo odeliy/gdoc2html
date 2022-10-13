@@ -4,7 +4,7 @@
 
 If you copy rich text from Google docs into the WordPress visual editor it does not copy cleanly. Lots of unnecessary HTML tags get added that can break the styling of the post.
 
-Some WP editors has a built in "clear formatting" function. This helps, but also comes with its own set of drawbacks. It clears all bolded, italicized, and underlined text. As well as adds inappropriate `aria` attributes to list item tags.
+Some WP editors have a built in "clear formatting" function. This helps, but also comes with its own set of drawbacks. It clears all bolded, italicized, and underlined text. As well as adds inappropriate `aria` attributes to list item tags.
 
 ## What this solves
 
