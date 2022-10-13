@@ -2,13 +2,13 @@
 
 ## What the problem is
 
-If you copy rich text from Google docs into the WordPress visual editor it does not copy cleanly. Lots unnecessary html tags get added that can break the styling of the page.
+If you copy rich text from Google docs into the WordPress visual editor it does not copy cleanly. Lots of unnecessary HTML tags get added that can break the styling of the post.
 
-Some WP editors has a built in "clear formatting" function. This helps, but also comes with its own set of drawbacks. It clears all bolded, italicized, and underlined text. As well as adds inappropriate arias attributes to list item tags.
+Some WP editors has a built in "clear formatting" function. This helps, but also comes with its own set of drawbacks. It clears all bolded, italicized, and underlined text. As well as adds inappropriate `aria` attributes to list item tags.
 
 ## What this solves
 
-This web app formats rich text from Google Docs into html that can be pasted cleanly into WordPress text-mode editor.
+This web app formats rich text from Google Docs into clean HTML that can be pasted directly into WordPress text-mode editor.
 
 It also formats hyperlinks so that all external going links open in a new tab, whereas internal links do not.
 
