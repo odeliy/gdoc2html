@@ -1,6 +1,6 @@
 import { detectFor, detectTag } from './detectors.js'
 
-export function removeTag(input, tagName) {
+function removeTag(input, tagName) {
   let newString = ''
   let inCorrectTag = false
 
@@ -22,7 +22,7 @@ export function removeTag(input, tagName) {
   return newString
 }
 
-export function swapTags(input, oldTag, newTag, detectFunction) {
+function swapTags(input, oldTag, newTag, attribute) {
   let newString = ''
   let inTargetOpeningTag = false
   let inTargetClosingTag = false
@@ -30,7 +30,7 @@ export function swapTags(input, oldTag, newTag, detectFunction) {
 
   for (let i = 0; i < input.length; i++) {
     if (input[i] === '<') {
-      if (detectTag(oldTag, input, i) && detectFunction(input, i)) {
+      if (detectTag(oldTag, input, i) && detectFor(input, i, attribute)) {
         inTargetOpeningTag = true
       } else if (detectTag(oldTag, input, i) && nextTagFlagged) {
         inTargetClosingTag = true
@@ -57,7 +57,7 @@ export function swapTags(input, oldTag, newTag, detectFunction) {
   return newString
 }
 
-export function stripTagAttributes(input) {
+function stripTagAttributes(input) {
   let newString = ''
   let inCoreTag = false
   let inAttributesArea = false
@@ -93,7 +93,7 @@ export function stripTagAttributes(input) {
   return newString
 }
 
-export function formatLinks(input, websiteName) {
+function formatLinks(input, websiteName) {
   function extractUrl(input, startIndex) {
     let fullTag = ''
     let url = ''
@@ -136,3 +136,45 @@ export function formatLinks(input, websiteName) {
   }
   return newString
 }
+
+function removeBoldedHeaders(input) {
+  let newString = ''
+  let inHeader = false
+  let inStrong = false
+
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] === '<' && !inHeader && !inStrong) {
+      newString += input[i]
+      for (let j = 1; j <= 6; j++) {
+        inHeader = detectTag(`h${j}`, input, i)
+        if (inHeader) break
+      }
+    } else if (input[i] === '<' && inHeader && !inStrong) {
+      let closingHeader = false
+      for (let j = 1; j <= 6; j++) {
+        closingHeader = detectTag(`h${j}`, input, i)
+        if (closingHeader) {
+          newString += input[i]
+          inHeader = false
+          break
+        }
+      }
+      if (!closingHeader) {
+        inStrong = detectTag('strong', input, i)
+        if (!inStrong) {
+          newString += input[i]
+        }
+      }
+    } else if (inHeader && inStrong) {
+      if (input[i] === '>') {
+        inStrong = false
+      }
+    } else {
+      newString += input[i]
+    }
+  }
+
+  return newString
+}
+
+export { removeTag, swapTags, stripTagAttributes, formatLinks, removeBoldedHeaders }

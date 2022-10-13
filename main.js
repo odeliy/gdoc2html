@@ -1,5 +1,4 @@
-import { formatLinks, removeTag, stripTagAttributes, swapTags } from './js/formatters.js'
-import { detectBold, detectItalic } from './js/detectors.js'
+import { formatLinks, removeBoldedHeaders, removeTag, stripTagAttributes, swapTags } from './js/formatters.js'
 import { setup } from './js/helpers.js'
 import { copiedHTML } from './js/copiedHTML.js'
 
@@ -13,11 +12,12 @@ function formatHTML(input) {
   newString = removeTag(newString, 'br')
   newString = removeTag(newString, 'colgroup')
   newString = removeTag(newString, 'col')
-  newString = swapTags(newString, 'span', 'strong', detectBold)
-  newString = swapTags(newString, 'span', 'em', detectItalic)
+  newString = swapTags(newString, 'span', 'strong', 'font-weight:700')
+  newString = swapTags(newString, 'span', 'em', 'font-style:italic')
   newString = removeTag(newString, 'span')
   newString = stripTagAttributes(newString)
   newString = formatLinks(newString, localStorage.getItem('website') || 'bankrate.com')
+  newString = removeBoldedHeaders(newString)
   return newString
 }
 
