@@ -5,19 +5,20 @@ import { copiedHTML } from './js/copiedHTML.js'
 const app = document.getElementById('app')
 
 function formatHTML(input) {
-  let newString = ''
-  newString = removeTag(input, 'meta')
-  newString = removeTag(newString, 'b')
-  newString = removeTag(newString, 'div')
-  newString = removeTag(newString, 'br')
-  newString = removeTag(newString, 'colgroup')
-  newString = removeTag(newString, 'col')
+  const junkTags = ['meta', 'b', 'div', 'br', 'colgroup', 'col']
+  let newString = input
+
+  junkTags.forEach((tag) => {
+    newString = removeTag(newString, tag)
+  })
+
   newString = swapTags(newString, 'span', 'strong', 'font-weight:700')
   newString = swapTags(newString, 'span', 'em', 'font-style:italic')
   newString = removeTag(newString, 'span')
   newString = stripTagAttributes(newString)
   newString = formatLinks(newString, localStorage.getItem('website') || 'bankrate.com')
   newString = removeBoldedHeaders(newString)
+
   return newString
 }
 
