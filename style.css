@@ -219,7 +219,3 @@ p {
   padding-inline: var(--gap-large);
   padding-bottom: var(--gap-medium);
 }
-
-.message p {
-  margin-bottom: 0;
-}
