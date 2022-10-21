@@ -1,6 +1,6 @@
 import { formatLinks, removeBoldedHeaders, removeTag, stripTagAttributes, swapTags } from './js/formatters.js'
-import { setup, verifyHTML } from './js/helpers.js'
-import { successHTML, failureHTML } from './js/messages.js'
+import { setup } from './js/helpers.js'
+import { successHTML } from './js/messages.js'
 
 const app = document.getElementById('app')
 
