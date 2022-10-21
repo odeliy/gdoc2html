@@ -52,9 +52,4 @@ function setup() {
   setupToggle()
 }
 
-function verifyHTML(input) {
-  // return false
-  return input ? true : false
-}
-
-export { setup, verifyHTML }
+export { setup }

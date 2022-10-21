@@ -26,20 +26,12 @@ function pasteClipboard(event) {
   let originalHTML = event.clipboardData.getData('text/html')
   let formattedHTML = formatHTML(originalHTML)
 
-  if (verifyHTML(formattedHTML)) {
-    // navigator api lets your write directly to clipboard
-    navigator.clipboard.writeText(formattedHTML).then(() => {
-      let successMessage = document.createElement('div')
-      successMessage.classList.add('message')
-      successMessage.innerHTML = successHTML
-      app.appendChild(successMessage)
-    })
-  } else {
-    let failureMessage = document.createElement('div')
-    failureMessage.classList.add('message')
-    failureMessage.innerHTML = failureHTML
-    app.appendChild(failureMessage)
-  }
+  navigator.clipboard.writeText(formattedHTML).then(() => {
+    let successMessage = document.createElement('div')
+    successMessage.classList.add('message')
+    successMessage.innerHTML = successHTML
+    app.appendChild(successMessage)
+  })
 }
 
 window.addEventListener('load', () => {
