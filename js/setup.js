@@ -47,9 +47,7 @@ function setupToggle() {
   toggleSwitchOuter.addEventListener('click', () => updateWebsite())
 }
 
-function setup() {
+export default function setup() {
   setupAccorion()
   setupToggle()
 }
-
-export { setup }

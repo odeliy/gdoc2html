@@ -1,6 +1,6 @@
+import setup from './js/setup.js'
 import { formatLinks, removeBoldedHeaders, removeTag, stripTagAttributes, swapTags } from './js/formatters.js'
-import { setup } from './js/helpers.js'
-import { successHTML } from './js/messages.js'
+import { failureHTML, successHTML } from './js/messages.js'
 
 const app = document.getElementById('app')
 
@@ -22,16 +22,23 @@ function formatHTML(input) {
   return newString
 }
 
-function pasteClipboard(event) {
+function processClipboard(event) {
   let originalHTML = event.clipboardData.getData('text/html')
-  let formattedHTML = formatHTML(originalHTML)
 
-  navigator.clipboard.writeText(formattedHTML).then(() => {
-    let successMessage = document.createElement('div')
-    successMessage.classList.add('message')
-    successMessage.innerHTML = successHTML
-    app.appendChild(successMessage)
-  })
+  if (originalHTML) {
+    let formattedHTML = formatHTML(originalHTML)
+    navigator.clipboard.writeText(formattedHTML).then(() => {
+      let successMessage = document.createElement('div')
+      successMessage.classList.add('message')
+      successMessage.innerHTML = successHTML
+      app.appendChild(successMessage)
+    })
+  } else {
+    let failureMessage = document.createElement('div')
+    failureMessage.classList.add('message')
+    failureMessage.innerHTML = failureHTML
+    app.appendChild(failureMessage)
+  }
 }
 
 window.addEventListener('load', () => {
@@ -49,4 +56,4 @@ window.addEventListener('keypress', (e) => {
 })
 
 // this starts all the action
-window.addEventListener('paste', (e) => pasteClipboard(e))
+window.addEventListener('paste', (e) => processClipboard(e))
