@@ -1,5 +1,5 @@
 import { detectTag } from './detectors.js'
-import { removeTag, swapTags } from './formatters.js'
+import { removeTag } from './formatters.js'
 
 function addNewTagsAndClasses(input) {
   let newString = ''
@@ -99,7 +99,6 @@ function populateTHead(input) {
 
 export default function formatTables(input) {
   let newString = ''
-
   newString = addNewTagsAndClasses(input)
   newString = removePTags(newString)
   newString = populateTHead(newString)
