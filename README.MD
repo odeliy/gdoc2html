@@ -6,11 +6,13 @@ If you copy rich text from Google docs into the WordPress visual editor it does 
 
 Some WP editors have a built in "clear formatting" function. This helps, but also comes with its own set of drawbacks. It clears all bolded, italicized, and underlined text. As well as adds inappropriate `aria` attributes to list item tags.
 
-## What this solves
+## What this app solves
 
-This web app formats rich text from Google Docs into clean HTML that can be pasted directly into WordPress text-mode editor.
+- Formats rich text from Google Docs into clean HTML that can be pasted directly into the WordPress text editor or Storyblock soure code section.
 
-It also formats hyperlinks so that all external going links open in a new tab, whereas internal links do not.
+- Formats hyperlinks so that all external going links open in a new tab, whereas internal links do not.
+
+- Formats tables and adds a bit of generic styling from the [Classy](https://classy.bankrate.com/v1/docs/components/tables.html#table-spacing) design system.
 
 ## Deployment
 
