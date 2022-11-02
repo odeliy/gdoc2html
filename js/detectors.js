@@ -1,4 +1,4 @@
-function detectTag(tagName, input, startIndex) {
+function detectTag(tagName, input, startIndex, openOnly = false) {
   if (input[startIndex] !== '<') {
     console.log('detectTag() error: not a tag')
     return
@@ -20,7 +20,11 @@ function detectTag(tagName, input, startIndex) {
   openingTag = testedTag === tagName ? true : false
   closingTag = testedTag.slice(1) === tagName ? true : false
 
-  return openingTag || closingTag ? true : false
+  if (openOnly) {
+    return openingTag ? true : false
+  } else {
+    return openingTag || closingTag ? true : false
+  }
 }
 
 function detectFor(input, startIndex, pattern) {
