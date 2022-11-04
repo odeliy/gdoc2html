@@ -1,6 +1,12 @@
 import setup from './js/setup.js'
 import formatTables from './js/formatTables.js'
-import { formatLinks, removeBoldedHeaders, removeTag, stripTagAttributes, swapTags } from './js/formatters.js'
+import {
+  formatLinks,
+  removeBoldedHeaders,
+  removeTag,
+  stripTagAttributes,
+  swapTags
+} from './js/formatters.js'
 import { failureHTML, successHTML } from './js/messages.js'
 
 const app = document.getElementById('app')

@@ -1,7 +1,7 @@
 import { detectTag } from './detectors.js'
 import { removeTag } from './formatters.js'
 
-function addNewTagsAndClasses(input) {
+function addConveniences(input) {
   let newString = ''
   let inTable = false
 
@@ -11,7 +11,7 @@ function addNewTagsAndClasses(input) {
       if (!inTable) newString += input[i]
     } else if (inTable) {
       if (input[i] === '>') {
-        newString += `<table class="table --bordered --spacing-xs"><thead></thead>`
+        newString += `<table class="table --bordered --spacing-xs"><thead><fragment></thead>`
         inTable = false
       }
     } else {
@@ -22,86 +22,108 @@ function addNewTagsAndClasses(input) {
   return newString
 }
 
-function removePTags(input) {
-  let arr = input.split(/(?=<td>)/g)
-  arr = arr.map((item) => (item = removeTag(item, 'p')))
-  return arr.join('')
-}
-
-function extractFragment(input) {
+function getFirstRowIndices(input, startPoint = 0) {
   let inTableRow = false
-  let startIndex = 0
-  let endIndex = 0
+  let indices = []
 
-  for (let i = 0; i < input.length; i++) {
+  for (let i = startPoint; i < input.length; i++) {
     if (input[i] === '<' && !inTableRow) {
       inTableRow = detectTag('tr', input, i, true)
-      if (inTableRow) startIndex = i
+      if (inTableRow) {
+        indices = [i]
+      }
     } else if (inTableRow) {
       if (input[i] === '<') {
         if (detectTag('tr', input, i)) {
-          endIndex = i + 5
+          indices.push(i + 5)
           break
         }
       }
     }
   }
-  return input.substring(startIndex, endIndex)
+  return indices
 }
 
-function populateTHead(input) {
+function getTableIndices(input, startPoint) {
+  let inTable = false
+  let indices = {
+    start: 0,
+    end: 0
+  }
+
+  for (let i = startPoint; i < input.length; i++) {
+    if (input[i] === '<' && !inTable) {
+      inTable = detectTag('table', input, i, true)
+      if (inTable) indices.start = i
+    } else if (inTable) {
+      if (input[i] === '<') {
+        let closingTag = detectTag('table', input, i)
+        if (closingTag) {
+          indices.end = i + 8
+          break
+        }
+      }
+    }
+  }
+
+  return indices
+}
+
+function formatTable(input) {
   // 1. store first <tr>...</tr> into fragment
-  let fragment = extractFragment(input)
+  let indices = getFirstRowIndices(input)
+  let fragment = input.substring(indices[0], indices[1])
 
   // 2. pull fragment from original string
   let newString = input.replace(fragment, '')
 
   // 3. swap all <td>s for <th>s in fragment
-  let newFragment = ''
-  let inModZone = false
-
-  for (let i = 0; i < fragment.length; i++) {
-    if (fragment[i] === '<') {
-      newFragment += fragment[i]
-      inModZone = detectTag('td', fragment, i)
-    } else if (inModZone) {
-      if (fragment[i] === 'd') {
-        newFragment += 'h'
-        inModZone = false
-      } else {
-        newFragment += fragment[i]
-      }
-    } else {
-      newFragment += fragment[i]
-    }
-  }
+  fragment = fragment.replace(/<td>/g, '<th>')
+  fragment = fragment.replace(/<\/td>/g, '</th>')
 
   // 4. place new fragment inside <thead></thead>
-  let finalString = ''
-  let inOpenHead = false
+  newString = newString.replace('<fragment>', fragment)
 
-  for (let i = 0; i < newString.length; i++) {
-    if (newString[i] === '<') {
-      inOpenHead = detectTag('thead', newString, i, true)
-      finalString += newString[i]
-    } else if (inOpenHead) {
-      finalString += newString[i]
-      if (newString[i] === '>') {
-        finalString += newFragment
-        inOpenHead = false
-      }
-    } else {
-      finalString += newString[i]
-    }
-  }
-  return finalString
+  return newString
 }
 
 export default function formatTables(input) {
-  let newString = ''
-  newString = addNewTagsAndClasses(input)
-  newString = removePTags(newString)
-  newString = populateTHead(newString)
+  // 0. add <thead>, add Classy attributes
+  let newString = addConveniences(input)
+
+  // 1. create array of all tables start/end points
+  let tableIndices = []
+  for (let i = 0; i < newString.length; i++) {
+    if (newString[i] === '<') {
+      const inTable = detectTag('table', newString, i, true)
+      if (inTable) tableIndices.push(getTableIndices(newString, i))
+    }
+  }
+
+  // 2. store all tables in an array
+  let tables = tableIndices.map((setOfIndices) =>
+    newString.substring(setOfIndices.start, setOfIndices.end)
+  )
+
+  // 3. remove tables from original string, leave <placeholder>s in place
+  tables.forEach((table) => {
+    newString = newString.replace(table, '<placeholder>')
+  })
+
+  // 4. remove <p> tags from tables
+  tables = tables.map((table) => {
+    let arr = table.split(/(?=<td>)/g)
+    arr = arr.map((item) => (item = removeTag(item, 'p')))
+    return arr.join('')
+  })
+
+  // 5. for each table, do the actual formatTable() stuff
+  tables = tables.map((table) => formatTable(table))
+
+  // 6. parse newString, replace <placeholder>s with the formatted tables
+  tables.forEach((table) => {
+    newString = newString.replace('<placeholder>', table)
+  })
 
   return newString
 }
