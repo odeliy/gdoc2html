@@ -1,18 +1,18 @@
-import { detectFor, detectTag } from './detectors.js'
+import { detectFor, detectTag, extractUrl } from './helpers.js'
 
 function removeTag(input, tagName) {
   let newString = ''
-  let inCorrectTag = false
+  let inTargetTag = false
 
   for (let i = 0; i < input.length; i++) {
     if (input[i] === '<') {
-      inCorrectTag = detectTag(tagName, input, i)
-      if (!inCorrectTag) {
+      inTargetTag = detectTag(tagName, input, i)
+      if (!inTargetTag) {
         newString += input[i]
       }
-    } else if (inCorrectTag) {
+    } else if (inTargetTag) {
       if (input[i] === '>') {
-        inCorrectTag = false
+        inTargetTag = false
       }
     } else {
       newString += input[i]
@@ -30,7 +30,7 @@ function swapTags(input, oldTag, newTag, attribute) {
 
   for (let i = 0; i < input.length; i++) {
     if (input[i] === '<') {
-      if (detectTag(oldTag, input, i) && detectFor(input, i, attribute)) {
+      if (detectTag(oldTag, input, i, true) && detectFor(input, i, attribute)) {
         inTargetOpeningTag = true
       } else if (detectTag(oldTag, input, i) && nextTagFlagged) {
         inTargetClosingTag = true
@@ -65,8 +65,8 @@ function stripTagAttributes(input) {
   for (let i = 0; i < input.length; i++) {
     if (input[i] === '<') {
       newString += input[i]
-
-      let inLink = detectFor(input, i, 'a href')
+      // ignore the stripping if an anchor tag
+      const inLink = detectFor(input, i, 'a href')
       if (!inLink) {
         inCoreTag = true
       }
@@ -94,19 +94,6 @@ function stripTagAttributes(input) {
 }
 
 function formatLinks(input, websiteName) {
-  function extractUrl(input, startIndex) {
-    let fullTag = ''
-    let url = ''
-
-    for (let i = startIndex; i < input.length; i++) {
-      fullTag += input[i]
-      if (input[i] === '>') break
-    }
-
-    url = fullTag.split('"')
-    return url[1]
-  }
-
   let newString = ''
   let url = ''
   let isLink = false
@@ -137,6 +124,7 @@ function formatLinks(input, websiteName) {
   return newString
 }
 
+// bug: removes italic if also bolded
 function removeBoldedHeaders(input) {
   let newString = ''
   let inHeader = false
@@ -146,7 +134,7 @@ function removeBoldedHeaders(input) {
     if (input[i] === '<' && !inHeader && !inStrong) {
       newString += input[i]
       for (let j = 1; j <= 6; j++) {
-        inHeader = detectTag(`h${j}`, input, i)
+        inHeader = detectTag(`h${j}`, input, i, true)
         if (inHeader) break
       }
     } else if (input[i] === '<' && inHeader && !inStrong) {

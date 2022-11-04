@@ -1,9 +1,4 @@
 function detectTag(tagName, input, startIndex, openOnly = false) {
-  if (input[startIndex] !== '<') {
-    console.log('detectTag() error: not a tag')
-    return
-  }
-
   let testedTag = ''
 
   for (let i = startIndex + 1; i < input.length; i++) {
@@ -14,11 +9,8 @@ function detectTag(tagName, input, startIndex, openOnly = false) {
     }
   }
 
-  let openingTag = false
-  let closingTag = false
-
-  openingTag = testedTag === tagName ? true : false
-  closingTag = testedTag.slice(1) === tagName ? true : false
+  let openingTag = testedTag === tagName ? true : false
+  let closingTag = testedTag.slice(1) === tagName ? true : false
 
   if (openOnly) {
     return openingTag ? true : false
@@ -38,4 +30,17 @@ function detectFor(input, startIndex, pattern) {
   return testedString.indexOf(pattern) > -1 ? true : false
 }
 
-export { detectTag, detectFor }
+function extractUrl(input, startIndex) {
+  let fullTag = ''
+  let url = ''
+
+  for (let i = startIndex; i < input.length; i++) {
+    fullTag += input[i]
+    if (input[i] === '>') break
+  }
+
+  url = fullTag.split('"')
+  return url[1]
+}
+
+export { detectTag, detectFor, extractUrl }

@@ -1,26 +1,5 @@
-import { detectTag } from './detectors.js'
+import { detectTag } from './helpers.js'
 import { removeTag } from './formatters.js'
-
-function addConveniences(input) {
-  let newString = ''
-  let inTable = false
-
-  for (let i = 0; i < input.length; i++) {
-    if (input[i] === '<') {
-      inTable = detectTag('table', input, i, true)
-      if (!inTable) newString += input[i]
-    } else if (inTable) {
-      if (input[i] === '>') {
-        newString += `<table class="table --bordered --spacing-xs"><thead><fragment></thead>`
-        inTable = false
-      }
-    } else {
-      newString += input[i]
-    }
-  }
-
-  return newString
-}
 
 function getFirstRowIndices(input, startPoint = 0) {
   let inTableRow = false
@@ -89,7 +68,10 @@ function formatTable(input) {
 
 export default function formatTables(input) {
   // 0. add <thead>, add Classy attributes
-  let newString = addConveniences(input)
+  let newString = input.replace(
+    /<table>/g, // using regex and global flag replaces all instances of
+    '<table class="table --bordered --spacing-xs"><thead><fragment></thead>'
+  )
 
   // 1. create array of all tables start/end points
   let tableIndices = []
