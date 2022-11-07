@@ -56,9 +56,10 @@ function formatTable(input) {
   // 2. pull fragment from original string
   let newString = input.replace(fragment, '')
 
-  // 3. swap all <td>s for <th>s in fragment
+  // 3. swap all <td>s for <th>s in fragment, remove <strong>s
   fragment = fragment.replace(/<td>/g, '<th>')
   fragment = fragment.replace(/<\/td>/g, '</th>')
+  fragment = removeTag(fragment, 'strong')
 
   // 4. place new fragment inside <thead></thead>
   newString = newString.replace('<fragment>', fragment)
