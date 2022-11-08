@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+$palette-background-strong: #111213ff;
+$palette-background-faded: #212224ff;
+$palette-text-primary: #ffffffff;
+$palette-text-secondary: #a1a1a1ff;
+$palette-accent-primary: #2f71e8ff;
+$palette-accent-secondary: #29b9f0ff;
+$gap-extra-small: 8px;
+$gap-small: 16px;
+$gap-medium: 32px;
+$gap-large: 64px;
+
+/************************/
+/* Globals **************/
+/************************/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: $palette-background-faded;
+  display: flex;
+  justify-content: center;
+  padding-inline: $gap-large;
+}
+
+a {
+  color: $palette-accent-secondary;
+}
+
+/************************/
+/* App ******************/
+/************************/
+.app {
+  margin-block: $gap-large;
+  background-color: $palette-background-strong;
+  box-shadow: $palette-background-strong 2px 5px 10px;
+  border-radius: 10px;
+}
+
+/************************/
+/* Window top ***********/
+/************************/
+.window-top {
+  color: $palette-text-secondary;
+  background-color: $palette-background-faded;
+  border: 1px solid $palette-background-strong;
+  border-radius: 10px 10px 0 0;
+  padding-inline: $gap-medium;
+  padding-block: $gap-small;
+  display: flex;
+  justify-content: space-between;
+}
+
+/************************/
+/* Window main **********/
+/************************/
+.window-main {
+  padding-inline: $gap-medium;
+  padding-block: $gap-medium;
+
+  h1 {
+    color: $palette-text-primary;
+
+    span {
+      color: $palette-accent-primary;
+    }
+  }
+}
+
+/************************/
+/* Settings **************/
+/************************/
+.settings {
+  margin-top: $gap-medium;
+  color: $palette-text-secondary;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-small;
+
+  .setting {
+    display: grid;
+    grid-template-columns: 25% auto;
+    grid-gap: $gap-extra-small;
+
+    p {
+      margin-left: $gap-medium;
+    }
+
+    .toggle {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      align-items: center;
+      grid-gap: $gap-extra-small;
+
+      .toggle-outer {
+        width: 50px;
+        height: 25px;
+        background-color: $palette-background-faded;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+
+        .toggle-inner {
+          height: 18px;
+          width: 18px;
+          background-color: $palette-accent-secondary;
+          border-radius: 18px;
+          margin-inline: 3.5px;
+        }
+      }
+    }
+  }
+}
+
+/************************/
+/* Footer ***************/
+/************************/
+.footer {
+  margin-top: $gap-medium;
+
+  p {
+    color: $palette-text-secondary;
+
+    span {
+      color: $palette-text-primary;
+    }
+  }
+}
+
+/************************/
+/* classes come from js */
+/************************/
+.message {
+  color: $palette-text-secondary;
+  padding-inline: $gap-medium;
+  padding-block: $gap-small;
+}
+
+.flip-toggle {
+  margin-left: auto !important;
+}
+
+.selected {
+  color: $palette-text-primary;
+}

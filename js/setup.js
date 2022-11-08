@@ -1,53 +1,66 @@
-function setupAccorion() {
-  const accordion = document.getElementsByClassName('accordion__content-box')
+function setupToggle(
+  nodeIndex,
+  toggleOuter,
+  toggleInner,
+  setting,
+  toggle1,
+  toggle2,
+  value1,
+  value2
+) {
+  let platformSelected = localStorage.getItem(setting) || value1
 
-  for (let i = 0; i < accordion.length; i++) {
-    accordion[i].addEventListener('click', (e) => {
-      accordion[i].classList.toggle('active')
-    })
-  }
-}
+  const option1 = document.getElementById(toggle1)
+  const option2 = document.getElementById(toggle2)
 
-function updateWebsite() {
-  let websiteSelected = localStorage.getItem('website') || 'bankrate.com'
-
-  if (websiteSelected === 'bankrate.com') {
-    toggleSwitchInner.classList.add('flip-toggle')
-    toggleBR.classList.remove('selected')
-    toggleCC.classList.add('selected')
-    localStorage.setItem('website', 'creditcards.com')
-  } else {
-    toggleSwitchInner.classList.remove('flip-toggle')
-    toggleBR.classList.add('selected')
-    toggleCC.classList.remove('selected')
-    localStorage.setItem('website', 'bankrate.com')
-  }
-}
-
-function setupToggle() {
-  const toggleSwitchOuter = document.getElementById('toggleSwitchOuter')
-  const toggleSwitchInner = document.getElementById('toggleSwitchInner')
-  const toggleBR = document.getElementById('toggleBR')
-  const toggleCC = document.getElementById('toggleCC')
-
-  let websiteSelected = localStorage.getItem('website') || 'bankrate.com'
-
-  if (websiteSelected === 'bankrate.com') {
-    toggleSwitchInner.classList.remove('flip-toggle')
-    toggleBR.classList.add('selected')
-    toggleCC.classList.remove('selected')
-  } else {
-    // creditcards.com is selected
-    toggleSwitchInner.classList.add('flip-toggle')
-    toggleBR.classList.remove('selected')
-    toggleCC.classList.add('selected')
+  if (platformSelected === value1) {
+    option1.classList.add('selected')
+    option2.classList.remove('selected')
+    toggleInner[nodeIndex].classList.remove('flip-toggle')
+  } else if (platformSelected === value2) {
+    option1.classList.remove('selected')
+    option2.classList.add('selected')
+    toggleInner[nodeIndex].classList.add('flip-toggle')
   }
 
-  // toggle local storage and visual indicator between br.com and cc.com
-  toggleSwitchOuter.addEventListener('click', () => updateWebsite())
+  toggleOuter[nodeIndex].addEventListener('click', () => {
+    platformSelected = localStorage.getItem(setting) || value1
+
+    if (platformSelected === value1) {
+      option1.classList.remove('selected')
+      option2.classList.add('selected')
+      toggleInner[nodeIndex].classList.add('flip-toggle')
+      localStorage.setItem(setting, value2)
+    } else if (platformSelected === value2) {
+      option1.classList.add('selected')
+      option2.classList.remove('selected')
+      toggleInner[nodeIndex].classList.remove('flip-toggle')
+      localStorage.setItem(setting, value1)
+    }
+  })
 }
 
 export default function setup() {
-  setupAccorion()
-  setupToggle()
+  const settings = [
+    ['platform', 'toggleWP', 'toggleSB', 'wordpress', 'storyblok'],
+    ['website', 'toggleBR', 'toggleCC', 'bankrate.com', 'creditcards.com'],
+    ['tables', 'toggleTableOn', 'toggleTableOff', 'on', 'off'],
+    ['toc', 'toggleTocOn', 'toggleTocOff', 'on', 'off']
+  ]
+
+  let toggleOuter = document.querySelectorAll('.toggle-outer')
+  let toggleInner = document.querySelectorAll('.toggle-inner')
+
+  settings.forEach((setting, index) => {
+    setupToggle(
+      index,
+      toggleOuter,
+      toggleInner,
+      setting[0],
+      setting[1],
+      setting[2],
+      setting[3],
+      setting[4]
+    )
+  })
 }

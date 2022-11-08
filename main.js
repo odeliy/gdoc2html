@@ -25,7 +25,7 @@ function formatHTML(input) {
   newString = stripTagAttributes(newString)
   newString = formatLinks(newString, localStorage.getItem('website') || 'bankrate.com')
   newString = removeBoldedHeaders(newString)
-  newString = formatTables(newString)
+  if (localStorage.getItem('tables') === 'on') newString = formatTables(newString)
 
   return newString
 }
@@ -49,19 +49,13 @@ function processClipboard(event) {
   }
 }
 
-window.addEventListener('load', () => {
-  setup()
-  // store app HTML after setup b/c classes are added/removed
-  localStorage.setItem('initialAppHTML', app.innerHTML)
-})
-
-// reset app by pressing enter
 window.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
-    app.innerHTML = localStorage.getItem('initialAppHTML')
+    location.reload()
     setup()
   }
 })
 
-// this starts all the action
+window.addEventListener('load', () => setup())
+
 window.addEventListener('paste', (e) => processClipboard(e))
