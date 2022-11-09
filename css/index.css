@@ -40,6 +40,7 @@ a {
 /* Window ***************/
 /************************/
 .window {
+  min-width: 550px;
   margin-top: var(--gap-large);
   background-color: var(--palette-background-strong);
   box-shadow: var(--palette-background-strong) 2px 5px 10px;
@@ -130,6 +131,7 @@ a {
 /* classes come from js */
 /************************/
 .message {
+  min-width: 550px;
   margin-block: var(--gap-medium);
   padding-inline: var(--gap-medium);
   padding-block: var(--gap-small);
