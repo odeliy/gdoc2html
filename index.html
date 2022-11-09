@@ -4,84 +4,87 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <title>gdoc2html</title>
   </head>
   <body>
     <div class="app" id="app">
-      <!-- WINDOW TOP -->
-      <div class="window-top">
-        <span>v2.3.1</span>
-        <span><a href="https://github.com/odeliy/gdoc2html" target="_blank">github</a></span>
-      </div>
-
-      <!-- WINDOW MAIN -->
-      <div class="window-main">
-        <h1>Google Doc to HTML <span>Formatter</span></h1>
-
-        <div class="settings">
-          <!-- WordPress / Storyblok -->
-          <div class="setting">
-            <div class="toggle">
-              <span id="toggleWP">WP</span>
-              <div class="toggle-outer">
-                <div class="toggle-inner"></div>
-              </div>
-              <span id="toggleSB">SB</span>
-            </div>
-            <p>CMS platform (WordPress only for now)</p>
-          </div>
-
-          <!-- Bankrate / CreditCards -->
-          <div class="setting">
-            <div class="toggle">
-              <span id="toggleBR">BR</span>
-              <div class="toggle-outer">
-                <div class="toggle-inner"></div>
-              </div>
-              <span id="toggleCC">CC</span>
-            </div>
-            <p>Website for internal linking</p>
-          </div>
-
-          <!-- Table settings -->
-          <div class="setting">
-            <div class="toggle">
-              <span id="toggleTableOn">ON</span>
-              <div class="toggle-outer">
-                <div class="toggle-inner"></div>
-              </div>
-              <span id="toggleTableOff">OFF</span>
-            </div>
-            <p>Format tables with Classy styling</p>
-          </div>
-
-          <!-- ToC settings -->
-          <div class="setting">
-            <div class="toggle">
-              <span id="toggleTocOn">ON</span>
-              <div class="toggle-outer">
-                <div class="toggle-inner"></div>
-              </div>
-              <span id="toggleTocOff">OFF</span>
-            </div>
-            <p>Add empty ToC shortcode to H2s</p>
-          </div>
+      <div class="window">
+        <!-- WINDOW TOP -->
+        <div class="window-top">
+          <span>v2.3.2</span>
+          <span><a href="https://github.com/odeliy/gdoc2html" target="_blank">github</a></span>
         </div>
 
-        <div class="footer">
-          <p>
-            For <span>error reporting</span> please contact
-            <a
-              href="https://app.slack.com/client/T029AV3QX/D03SQDP3DQQ/rimeto_profile/U03S357E20L"
-              target="_blank"
-              rel="noopener"
-              >Cody Iott</a
-            >.
-          </p>
+        <!-- WINDOW BODY -->
+        <div class="window-body">
+          <h1>Google Doc to HTML <span>Formatter</span></h1>
+
+          <div class="settings">
+            <!-- WordPress / Storyblok -->
+            <div class="setting">
+              <div class="toggle">
+                <span id="toggleWP">WP</span>
+                <div class="toggle-outer">
+                  <div class="toggle-inner"></div>
+                </div>
+                <span id="toggleSB">SB</span>
+              </div>
+              <p>CMS platform (WordPress only for now)</p>
+            </div>
+
+            <!-- Bankrate / CreditCards -->
+            <div class="setting">
+              <div class="toggle">
+                <span id="toggleBR">BR</span>
+                <div class="toggle-outer">
+                  <div class="toggle-inner"></div>
+                </div>
+                <span id="toggleCC">CC</span>
+              </div>
+              <p>Website for internal linking</p>
+            </div>
+
+            <!-- Table settings -->
+            <div class="setting">
+              <div class="toggle">
+                <span id="toggleTableOn">ON</span>
+                <div class="toggle-outer">
+                  <div class="toggle-inner"></div>
+                </div>
+                <span id="toggleTableOff">OFF</span>
+              </div>
+              <p>Format tables with Classy styling</p>
+            </div>
+
+            <!-- ToC settings -->
+            <div class="setting">
+              <div class="toggle">
+                <span id="toggleTocOn">ON</span>
+                <div class="toggle-outer">
+                  <div class="toggle-inner"></div>
+                </div>
+                <span id="toggleTocOff">OFF</span>
+              </div>
+              <p>Add empty ToC shortcode to H2s</p>
+            </div>
+          </div>
+
+          <div class="footer">
+            <p>
+              For <span>error reporting</span> please contact
+              <a
+                href="https://app.slack.com/client/T029AV3QX/D03SQDP3DQQ/rimeto_profile/U03S357E20L"
+                target="_blank"
+                rel="noopener"
+                >Cody Iott</a
+              >.
+            </p>
+          </div>
         </div>
       </div>
+      <div id="message"></div>
     </div>
-    <script src="main.js" type="module"></script>
+    <script src="./js/main.js" type="module"></script>
   </body>
 </html>
