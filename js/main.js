@@ -1,5 +1,6 @@
 import setup from './setup.js'
 import formatTables from './formatTables.js'
+import { failureHTML, successHTML } from './messages.js'
 import {
   addTocShortcode,
   formatLinks,
@@ -8,9 +9,7 @@ import {
   stripTagAttributes,
   swapTags
 } from './formatters.js'
-import { failureHTML, successHTML } from './messages.js'
 
-const app = document.getElementById('app')
 const message = document.getElementById('message')
 
 function formatHTML(input) {
