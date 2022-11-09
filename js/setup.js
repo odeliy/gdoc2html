@@ -41,6 +41,9 @@ function setupToggle(
 }
 
 export default function setup() {
+  let toggleOuter = document.querySelectorAll('.toggle-outer')
+  let toggleInner = document.querySelectorAll('.toggle-inner')
+
   const settings = [
     ['platform', 'toggleWP', 'toggleSB', 'wordpress', 'storyblok'],
     ['website', 'toggleBR', 'toggleCC', 'bankrate.com', 'creditcards.com'],
@@ -48,8 +51,12 @@ export default function setup() {
     ['toc', 'toggleTocOn', 'toggleTocOff', 'on', 'off']
   ]
 
-  let toggleOuter = document.querySelectorAll('.toggle-outer')
-  let toggleInner = document.querySelectorAll('.toggle-inner')
+  settings.forEach((setting) => {
+    const doesThisExistYet = localStorage.getItem(setting[0])
+    if (!doesThisExistYet) {
+      localStorage.setItem(setting[0], setting[3])
+    }
+  })
 
   settings.forEach((setting, index) => {
     setupToggle(

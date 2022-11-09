@@ -24,8 +24,9 @@ function formatHTML(input) {
   newString = swapTags(newString, 'span', 'em', 'font-style:italic')
   newString = removeTag(newString, 'span')
   newString = stripTagAttributes(newString)
-  newString = formatLinks(newString, localStorage.getItem('website') || 'bankrate.com')
+  newString = formatLinks(newString, localStorage.getItem('website'))
   newString = removeBoldedHeaders(newString)
+
   if (localStorage.getItem('tables') === 'on') newString = formatTables(newString)
   if (localStorage.getItem('toc') === 'on' && localStorage.getItem('platform') === 'wordpress')
     newString = addTocShortcode(newString)
