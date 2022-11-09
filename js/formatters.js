@@ -165,4 +165,47 @@ function removeBoldedHeaders(input) {
   return newString
 }
 
-export { removeTag, swapTags, stripTagAttributes, formatLinks, removeBoldedHeaders }
+function addTocShortcode(input) {
+  function checkForBottomLine(input, index) {
+    let headerString = ''
+
+    for (let i = index + 1; i < input.length; i++) {
+      if (input[i] !== '<') {
+        headerString += input[i]
+      } else {
+        break
+      }
+    }
+
+    return detectFor(headerString.toLowerCase(), 0, 'bottom line')
+  }
+
+  let newString = ''
+  let inH2 = false
+
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] === '<') {
+      inH2 = detectTag('h2', input, i, true)
+      newString += input[i]
+    } else if (input[i] === '>' && inH2) {
+      inH2 = false
+      if (checkForBottomLine(input, i)) {
+        newString += '>'
+      } else {
+        newString += '>[su_bookmark id=""]'
+      }
+    } else {
+      newString += input[i]
+    }
+  }
+  return newString
+}
+
+export {
+  removeTag,
+  swapTags,
+  stripTagAttributes,
+  formatLinks,
+  removeBoldedHeaders,
+  addTocShortcode
+}

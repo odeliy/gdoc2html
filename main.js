@@ -1,6 +1,7 @@
 import setup from './js/setup.js'
 import formatTables from './js/formatTables.js'
 import {
+  addTocShortcode,
   formatLinks,
   removeBoldedHeaders,
   removeTag,
@@ -26,6 +27,7 @@ function formatHTML(input) {
   newString = formatLinks(newString, localStorage.getItem('website') || 'bankrate.com')
   newString = removeBoldedHeaders(newString)
   if (localStorage.getItem('tables') === 'on') newString = formatTables(newString)
+  if (localStorage.getItem('toc') === 'on') newString = addTocShortcode(newString)
 
   return newString
 }
