@@ -1,5 +1,5 @@
-import setup from './js/setup.js'
-import formatTables from './js/formatTables.js'
+import setup from './setup.js'
+import formatTables from './formatTables.js'
 import {
   addTocShortcode,
   formatLinks,
@@ -7,10 +7,11 @@ import {
   removeTag,
   stripTagAttributes,
   swapTags
-} from './js/formatters.js'
-import { failureHTML, successHTML } from './js/messages.js'
+} from './formatters.js'
+import { failureHTML, successHTML } from './messages.js'
 
 const app = document.getElementById('app')
+const message = document.getElementById('message')
 
 function formatHTML(input) {
   const junkTags = ['meta', 'b', 'div', 'br', 'colgroup', 'col']
@@ -42,13 +43,13 @@ function processClipboard(event) {
       let successMessage = document.createElement('div')
       successMessage.classList.add('message')
       successMessage.innerHTML = successHTML
-      app.appendChild(successMessage)
+      message.appendChild(successMessage)
     })
   } else {
     let failureMessage = document.createElement('div')
     failureMessage.classList.add('message')
     failureMessage.innerHTML = failureHTML
-    app.appendChild(failureMessage)
+    message.appendChild(failureMessage)
   }
 }
 
