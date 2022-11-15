@@ -28,12 +28,15 @@ export default function setup() {
   })
 
   // website toggle
+
   if (localStorage.getItem('website') === 'bankrate.com') {
+    console.log('bankrate')
     toggleBR.classList.add('selected')
     toggleCC.classList.remove('selected')
     websiteToggleInner.classList.remove('flip-toggle')
     tocToggleInner.classList.remove('disabled')
-  } else if (localStorage.getItem('website' === 'creditcards.com')) {
+  } else if (localStorage.getItem('website') === 'creditcards.com') {
+    console.log('creditcards')
     toggleBR.classList.remove('selected')
     toggleCC.classList.add('selected')
     websiteToggleInner.classList.add('flip-toggle')
