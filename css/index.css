@@ -149,3 +149,7 @@ a {
 .selected {
   color: var(--palette-text-primary);
 }
+
+.disabled {
+  background-color: var(--palette-text-secondary) !important;
+}
