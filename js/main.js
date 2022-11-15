@@ -12,6 +12,7 @@ import {
 
 const message = document.getElementById('message')
 
+// This is the main function that controls the formatting logic
 function formatHTML(input) {
   const junkTags = ['meta', 'b', 'div', 'br', 'colgroup', 'col']
   let newString = input
@@ -62,4 +63,5 @@ window.addEventListener('keypress', (e) => {
 
 window.addEventListener('load', () => setup())
 
+// All the action starts here...
 window.addEventListener('paste', (e) => processClipboard(e))

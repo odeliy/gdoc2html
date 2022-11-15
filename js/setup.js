@@ -45,7 +45,6 @@ export default function setup() {
   let toggleInner = document.querySelectorAll('.toggle-inner')
 
   const settings = [
-    ['platform', 'toggleWP', 'toggleSB', 'wordpress', 'storyblok'],
     ['website', 'toggleBR', 'toggleCC', 'bankrate.com', 'creditcards.com'],
     ['tables', 'toggleTableOn', 'toggleTableOff', 'on', 'off'],
     ['toc', 'toggleTocOn', 'toggleTocOff', 'on', 'off']
