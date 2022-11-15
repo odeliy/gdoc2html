@@ -67,12 +67,21 @@ function formatTable(input) {
   return newString
 }
 
-export default function formatTables(input) {
-  // 0. add <thead>, add Classy attributes
-  let newString = input.replace(
-    /<table>/g, // using regex and global flag replaces all instances of
-    '<table class="table --bordered --spacing-xs"><thead><fragment></thead>'
-  )
+export default function formatTables(input, website) {
+  // 0. add <thead>, add Classy attributes based on website selected
+  let newString = ''
+
+  if (website === 'creditcards.com') {
+    newString = input.replace(
+      /<table>/g, // using regex and global flag replaces all instances of
+      '<table class="table table-bordered table-striped" border="0"><thead><fragment></thead>'
+    )
+  } else {
+    newString = input.replace(
+      /<table>/g, // using regex and global flag replaces all instances of
+      '<table class="table --bordered --spacing-xs"><thead><fragment></thead>'
+    )
+  }
 
   // 1. create array of all tables start/end points
   let tableIndices = []

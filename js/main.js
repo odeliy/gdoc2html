@@ -28,8 +28,9 @@ function formatHTML(input) {
   newString = formatLinks(newString, localStorage.getItem('website'))
   newString = removeBoldedHeaders(newString)
 
-  if (localStorage.getItem('tables') === 'on') newString = formatTables(newString)
-  if (localStorage.getItem('toc') === 'on' && localStorage.getItem('platform') === 'wordpress')
+  if (localStorage.getItem('tables') === 'on')
+    newString = formatTables(newString, localStorage.getItem('website'))
+  if (localStorage.getItem('toc') === 'on' && localStorage.getItem('website') === 'bankrate.com')
     newString = addTocShortcode(newString)
 
   return newString

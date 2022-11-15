@@ -12,6 +12,7 @@
   --gap-medium: 32px;
   --gap-large: 64px;
   --rounded-edge: 10px;
+  --min-width: 640px;
 }
 
 /************************/
@@ -40,7 +41,7 @@ a {
 /* Window ***************/
 /************************/
 .window {
-  min-width: 550px;
+  min-width: var(--min-width);
   margin-top: var(--gap-large);
   background-color: var(--palette-background-strong);
   box-shadow: var(--palette-background-strong) 2px 5px 10px;
@@ -86,7 +87,7 @@ a {
 }
 .settings .setting {
   display: grid;
-  grid-template-columns: 25% auto;
+  grid-template-columns: 1fr 3fr;
   grid-gap: var(--gap-extra-small);
 }
 .settings .setting p {
@@ -131,7 +132,7 @@ a {
 /* classes come from js */
 /************************/
 .message {
-  min-width: 550px;
+  min-width: var(--min-width);
   margin-block: var(--gap-medium);
   padding-inline: var(--gap-medium);
   padding-block: var(--gap-small);
