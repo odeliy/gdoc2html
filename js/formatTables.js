@@ -67,19 +67,26 @@ function formatTable(input) {
   return newString
 }
 
-export default function formatTables(input, website) {
-  // 0. add <thead>, add Classy attributes based on website selected
+export default function formatTables(input, website, platform) {
+  // 0. modify table and head based on website and platform
   let newString = ''
 
-  if (website === 'creditcards.com') {
+  if (platform === 'wordpress') {
+    if (website === 'bankrate.com') {
+      newString = input.replace(
+        /<table>/g, // using regex and global flag replaces all instances of
+        '<table class="table --bordered --spacing-xs"><thead><fragment></thead>'
+      )
+    } else if (website === 'creditcards.com') {
+      newString = input.replace(
+        /<table>/g, // using regex and global flag replaces all instances of
+        '<table class="table table-bordered table-striped" border="0"><thead><fragment></thead>'
+      )
+    }
+  } else if (platform === 'storyblok') {
     newString = input.replace(
       /<table>/g, // using regex and global flag replaces all instances of
-      '<table class="table table-bordered table-striped" border="0"><thead><fragment></thead>'
-    )
-  } else {
-    newString = input.replace(
-      /<table>/g, // using regex and global flag replaces all instances of
-      '<table class="table --bordered --spacing-xs"><thead><fragment></thead>'
+      '<table class="table"><thead><fragment></thead>'
     )
   }
 

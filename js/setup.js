@@ -1,4 +1,69 @@
+function platformEventListener() {
+  let platformSelection = localStorage.getItem('platform')
+  if (platformSelection === 'wordpress') {
+    toggleWP.classList.remove('selected')
+    toggleSB.classList.add('selected')
+    platformToggleInner.classList.add('flip-toggle')
+    localStorage.setItem('platform', 'storyblok')
+  } else if (platformSelection === 'storyblok') {
+    toggleWP.classList.add('selected')
+    toggleSB.classList.remove('selected')
+    platformToggleInner.classList.remove('flip-toggle')
+    localStorage.setItem('platform', 'wordpress')
+  }
+}
+
+function websiteEventListener() {
+  let websiteSelection = localStorage.getItem('website')
+  if (websiteSelection === 'bankrate.com') {
+    toggleBR.classList.remove('selected')
+    toggleCC.classList.add('selected')
+    websiteToggleInner.classList.add('flip-toggle')
+    localStorage.setItem('website', 'creditcards.com')
+  } else if (websiteSelection === 'creditcards.com') {
+    toggleBR.classList.add('selected')
+    toggleCC.classList.remove('selected')
+    websiteToggleInner.classList.remove('flip-toggle')
+    localStorage.setItem('website', 'bankrate.com')
+  }
+}
+
+function tablesEventListener() {
+  let tablesSelection = localStorage.getItem('tables')
+  if (tablesSelection === 'on') {
+    toggleTableOn.classList.remove('selected')
+    toggleTableOff.classList.add('selected')
+    tablesToggleInner.classList.add('flip-toggle')
+    localStorage.setItem('tables', 'off')
+  } else if (tablesSelection === 'off') {
+    toggleTableOn.classList.add('selected')
+    toggleTableOff.classList.remove('selected')
+    tablesToggleInner.classList.remove('flip-toggle')
+    localStorage.setItem('tables', 'on')
+  }
+}
+
+function tocEventListener() {
+  let tablesSelection = localStorage.getItem('toc')
+  if (tablesSelection === 'on') {
+    toggleTocOn.classList.remove('selected')
+    toggleTocOff.classList.add('selected')
+    tocToggleInner.classList.add('flip-toggle')
+    localStorage.setItem('toc', 'off')
+  } else if (tablesSelection === 'off') {
+    toggleTocOn.classList.add('selected')
+    toggleTocOff.classList.remove('selected')
+    tocToggleInner.classList.remove('flip-toggle')
+    localStorage.setItem('toc', 'on')
+  }
+}
+
 export default function setup() {
+  const platformToggleOuter = document.getElementById('platformToggleOuter')
+  const platformToggleInner = document.getElementById('platformToggleInner')
+  const toggleWP = document.getElementById('toggleWP')
+  const toggleSB = document.getElementById('toggleSB')
+
   const websiteToggleOuter = document.getElementById('websiteToggleOuter')
   const websiteToggleInner = document.getElementById('websiteToggleInner')
   const toggleBR = document.getElementById('toggleBR')
@@ -15,6 +80,7 @@ export default function setup() {
   const toggleTocOff = document.getElementById('toggleTocOff')
 
   const defaults = [
+    ['platform', 'wordpress'],
     ['website', 'bankrate.com'],
     ['tables', 'on'],
     ['toc', 'off']
@@ -27,41 +93,30 @@ export default function setup() {
     }
   })
 
-  // website toggle
+  // platform toggle
+  if (localStorage.getItem('platform') === 'wordpress') {
+    toggleWP.classList.add('selected')
+    toggleSB.classList.remove('selected')
+    platformToggleInner.classList.remove('flip-toggle')
+  } else if (localStorage.getItem('platform') === 'storyblok') {
+    toggleWP.classList.remove('selected')
+    toggleSB.classList.add('selected')
+    platformToggleInner.classList.add('flip-toggle')
+  }
+  platformToggleOuter.addEventListener('click', platformEventListener)
 
+  // website toggle
   if (localStorage.getItem('website') === 'bankrate.com') {
-    console.log('bankrate')
     toggleBR.classList.add('selected')
     toggleCC.classList.remove('selected')
     websiteToggleInner.classList.remove('flip-toggle')
-    tocToggleInner.classList.remove('disabled')
   } else if (localStorage.getItem('website') === 'creditcards.com') {
-    console.log('creditcards')
     toggleBR.classList.remove('selected')
     toggleCC.classList.add('selected')
     websiteToggleInner.classList.add('flip-toggle')
-    tocToggleInner.classList.add('disabled')
     tocToggleOuter.removeEventListener('click', tocEventListener)
   }
-
-  websiteToggleOuter.addEventListener('click', () => {
-    let websiteSelection = localStorage.getItem('website')
-    if (websiteSelection === 'bankrate.com') {
-      toggleBR.classList.remove('selected')
-      toggleCC.classList.add('selected')
-      websiteToggleInner.classList.add('flip-toggle')
-      tocToggleInner.classList.add('disabled')
-      tocToggleOuter.removeEventListener('click', tocEventListener)
-      localStorage.setItem('website', 'creditcards.com')
-    } else if (websiteSelection === 'creditcards.com') {
-      toggleBR.classList.add('selected')
-      toggleCC.classList.remove('selected')
-      websiteToggleInner.classList.remove('flip-toggle')
-      tocToggleInner.classList.remove('disabled')
-      tocToggleOuter.addEventListener('click', tocEventListener)
-      localStorage.setItem('website', 'bankrate.com')
-    }
-  })
+  websiteToggleOuter.addEventListener('click', websiteEventListener)
 
   // tables toggle
   if (localStorage.getItem('tables') === 'on') {
@@ -73,21 +128,7 @@ export default function setup() {
     toggleTableOff.classList.add('selected')
     tablesToggleInner.classList.add('flip-toggle')
   }
-
-  tablesToggleOuter.addEventListener('click', () => {
-    let tablesSelection = localStorage.getItem('tables')
-    if (tablesSelection === 'on') {
-      toggleTableOn.classList.remove('selected')
-      toggleTableOff.classList.add('selected')
-      tablesToggleInner.classList.add('flip-toggle')
-      localStorage.setItem('tables', 'off')
-    } else if (tablesSelection === 'off') {
-      toggleTableOn.classList.add('selected')
-      toggleTableOff.classList.remove('selected')
-      tablesToggleInner.classList.remove('flip-toggle')
-      localStorage.setItem('tables', 'on')
-    }
-  })
+  tablesToggleOuter.addEventListener('click', tablesEventListener)
 
   // toc toggle
   if (localStorage.getItem('toc') === 'on') {
@@ -99,21 +140,5 @@ export default function setup() {
     toggleTocOff.classList.add('selected')
     tocToggleInner.classList.add('flip-toggle')
   }
-
-  function tocEventListener() {
-    let tablesSelection = localStorage.getItem('toc')
-    if (tablesSelection === 'on') {
-      toggleTocOn.classList.remove('selected')
-      toggleTocOff.classList.add('selected')
-      tocToggleInner.classList.add('flip-toggle')
-      localStorage.setItem('toc', 'off')
-    } else if (tablesSelection === 'off') {
-      toggleTocOn.classList.add('selected')
-      toggleTocOff.classList.remove('selected')
-      tocToggleInner.classList.remove('flip-toggle')
-      localStorage.setItem('toc', 'on')
-    }
-  }
-
   tocToggleOuter.addEventListener('click', tocEventListener)
 }

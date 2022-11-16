@@ -1,5 +1,6 @@
 import setup from './setup.js'
 import formatTables from './formatTables.js'
+import formatStoryblok from './formatStoryblok.js'
 import { failureHTML, successHTML } from './messages.js'
 import {
   addTocShortcode,
@@ -12,15 +13,15 @@ import {
 
 const message = document.getElementById('message')
 
-// This is the main function that controls the formatting logic
 function formatHTML(input) {
+  // get rid of junk
   const junkTags = ['meta', 'b', 'div', 'br', 'colgroup', 'col']
   let newString = input
-
   junkTags.forEach((tag) => {
     newString = removeTag(newString, tag)
   })
 
+  // perform platform agnostic formatting
   newString = swapTags(newString, 'span', 'strong', 'font-weight:700')
   newString = swapTags(newString, 'span', 'em', 'font-style:italic')
   newString = removeTag(newString, 'span')
@@ -28,9 +29,23 @@ function formatHTML(input) {
   newString = formatLinks(newString, localStorage.getItem('website'))
   newString = removeBoldedHeaders(newString)
 
+  // storyblok specific formatting
+  if (localStorage.getItem('platform') === 'storyblok') newString = formatStoryblok(newString)
+
+  // modify tables based on website and platform
   if (localStorage.getItem('tables') === 'on')
-    newString = formatTables(newString, localStorage.getItem('website'))
-  if (localStorage.getItem('toc') === 'on' && localStorage.getItem('website') === 'bankrate.com')
+    newString = formatTables(
+      newString,
+      localStorage.getItem('website'),
+      localStorage.getItem('platform')
+    )
+
+  // add ToC shortcode if in WP && BR
+  if (
+    localStorage.getItem('toc') === 'on' &&
+    localStorage.getItem('website') === 'bankrate.com' &&
+    localStorage.getItem('platform') === 'wordpress'
+  )
     newString = addTocShortcode(newString)
 
   return newString
