@@ -127,6 +127,15 @@ a {
 .footer p span {
   color: var(--palette-text-primary);
 }
+.footer h2 {
+  color: var(--palette-text-primary);
+}
+.footer ol {
+  color: var(--palette-text-primary);
+}
+.footer li {
+  color: var(--palette-text-primary);
+}
 
 /************************/
 /* classes come from js */
