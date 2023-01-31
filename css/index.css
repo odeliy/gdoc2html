@@ -119,22 +119,17 @@ a {
 /* Footer ***************/
 /************************/
 .footer {
-  margin-top: var(--gap-medium);
-}
-.footer p {
   color: var(--palette-text-secondary);
 }
-.footer p span {
-  color: var(--palette-text-primary);
-}
+
 .footer h2 {
+  margin-top: var(--gap-medium);
+  margin-bottom: var(--gap-extra-small);
   color: var(--palette-text-primary);
 }
+
 .footer ol {
-  color: var(--palette-text-primary);
-}
-.footer li {
-  color: var(--palette-text-primary);
+  padding-left: var(--gap-small);
 }
 
 /************************/
