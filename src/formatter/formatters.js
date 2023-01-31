@@ -165,39 +165,29 @@ function removeBoldedHeaders(input) {
   return newString
 }
 
-function addTocShortcode(input) {
-  function checkForBottomLine(input, index) {
-    let headerString = ''
-
-    for (let i = index + 1; i < input.length; i++) {
-      if (input[i] !== '<') {
-        headerString += input[i]
-      } else {
-        break
-      }
-    }
-
-    return detectFor(headerString.toLowerCase(), 0, 'bottom line')
-  }
-
+function removeParagraphTagsFromLists(input) {
   let newString = ''
-  let inH2 = false
+  let inListEditMode = false
+  let inParaDeleteMode = false
 
   for (let i = 0; i < input.length; i++) {
-    if (input[i] === '<') {
-      inH2 = detectTag('h2', input, i, true)
+    if (input[i] === '<' && !inListEditMode) {
+      inListEditMode = detectFor(input, i, 'li')
       newString += input[i]
-    } else if (input[i] === '>' && inH2) {
-      inH2 = false
-      if (checkForBottomLine(input, i)) {
-        newString += '>'
-      } else {
-        newString += '>[su_bookmark id=""]'
-      }
+    } else if (input[i] === '<' && inListEditMode && !inParaDeleteMode) {
+      inParaDeleteMode = detectFor(input, i, 'p')
+      if (!inParaDeleteMode) newString += input[i]
+
+      // get out of inListEditMode
+      const closingTag = detectFor(input, i, 'li')
+      if (closingTag && inListEditMode) inListEditMode = !inListEditMode
+    } else if (inListEditMode && inParaDeleteMode) {
+      if (input[i] === '>') inParaDeleteMode = !inParaDeleteMode
     } else {
       newString += input[i]
     }
   }
+
   return newString
 }
 
@@ -207,5 +197,5 @@ export {
   stripTagAttributes,
   formatLinks,
   removeBoldedHeaders,
-  addTocShortcode
+  removeParagraphTagsFromLists
 }
