@@ -12,14 +12,13 @@
   --gap-medium: 32px;
   --gap-large: 64px;
   --rounded-edge: 10px;
-  --min-width: 640px;
+  --width: 640px;
 }
 
 /************************/
 /* Globals **************/
 /************************/
 * {
-  padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
@@ -41,7 +40,7 @@ a {
 /* Window ***************/
 /************************/
 .window {
-  min-width: var(--min-width);
+  width: var(--width);
   margin-top: var(--gap-large);
   background-color: var(--palette-background-strong);
   box-shadow: var(--palette-background-strong) 2px 5px 10px;
@@ -120,6 +119,7 @@ a {
 /************************/
 .footer {
   color: var(--palette-text-secondary);
+  line-height: 1.75em;
 }
 
 .footer h2 {
@@ -132,11 +132,15 @@ a {
   padding-left: var(--gap-small);
 }
 
+.footer ol li::marker {
+  color: var(--palette-text-primary);
+}
+
 /************************/
 /* classes come from js */
 /************************/
 .message {
-  min-width: var(--min-width);
+  width: var(--width);
   margin-block: var(--gap-medium);
   padding-inline: var(--gap-medium);
   padding-block: var(--gap-small);
