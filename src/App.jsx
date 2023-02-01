@@ -23,14 +23,14 @@ const App = () => {
         togglePositionLeft: true,
         toggleLabels: ['WP', 'SB'],
         toggleValues: ['wordpress', 'storyblok'],
-        description: 'CMS platform'
+        description: 'CMS platform. WordPress or Storyblok'
       },
       {
         name: 'website',
         togglePositionLeft: true,
         toggleLabels: ['BR', 'CC'],
         toggleValues: ['bankrate.com', 'creditcards.com'],
-        description: 'Website for internal linking and table defaults'
+        description: 'Website defaults. Bankrate or CreditCards'
       }
     ]
   )
