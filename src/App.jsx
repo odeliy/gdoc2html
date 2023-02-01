@@ -31,13 +31,6 @@ const App = () => {
         toggleLabels: ['BR', 'CC'],
         toggleValues: ['bankrate.com', 'creditcards.com'],
         description: 'Website for internal linking and table defaults'
-      },
-      {
-        name: 'tableFormatting',
-        togglePositionLeft: true,
-        toggleLabels: ['ON', 'OFF'],
-        toggleValues: [true, false],
-        description: 'Change table structure and add default styling'
       }
     ]
   )
