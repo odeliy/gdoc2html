@@ -13,6 +13,9 @@ const StyledToggle = styled.div`
   .description {
     padding-left: ${theme.gap.sm};
   }
+  .selected {
+    color: ${theme.palette.textBold};
+  }
 
   .toggleOuter {
     width: 50px;
@@ -39,16 +42,16 @@ const StyledToggle = styled.div`
 export const Toggle = ({ feature, toggleSetting }) => {
   return (
     <StyledToggle>
-      <span className='value'>{feature.toggleLabels[0]}</span>
-      <div className='toggleOuter' onClick={() => toggleSetting(feature.name)}>
-        <div
-          className={
-            `toggleInner ` + (!feature.togglePositionLeft && 'flipToggle')
-          }
-        ></div>
+      <span className={`value ${feature.togglePositionLeft && 'selected'}`}>
+        {feature.toggleLabels[0]}
+      </span>
+      <div className="toggleOuter" onClick={() => toggleSetting(feature.name)}>
+        <div className={`toggleInner ` + (!feature.togglePositionLeft && 'flipToggle')}></div>
       </div>
-      <span className='value'>{feature.toggleLabels[1]}</span>
-      <span className='description'>{feature.description}</span>
+      <span className={`value ${!feature.togglePositionLeft && 'selected'}`}>
+        {feature.toggleLabels[1]}
+      </span>
+      <span className="description">{feature.description}</span>
     </StyledToggle>
   )
 }
