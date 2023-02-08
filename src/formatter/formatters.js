@@ -172,14 +172,14 @@ function removeParagraphTagsFromLists(input) {
 
   for (let i = 0; i < input.length; i++) {
     if (input[i] === '<' && !inListEditMode) {
-      inListEditMode = detectFor(input, i, 'li')
+      inListEditMode = detectTag('li', input, i, true)
       newString += input[i]
     } else if (input[i] === '<' && inListEditMode && !inParaDeleteMode) {
-      inParaDeleteMode = detectFor(input, i, 'p')
+      inParaDeleteMode = detectTag('p', input, i, true)
       if (!inParaDeleteMode) newString += input[i]
 
       // get out of inListEditMode
-      const closingTag = detectFor(input, i, 'li')
+      const closingTag = detectTag('li', input, i, false)
       if (closingTag && inListEditMode) inListEditMode = !inListEditMode
     } else if (inListEditMode && inParaDeleteMode) {
       if (input[i] === '>') inParaDeleteMode = !inParaDeleteMode
