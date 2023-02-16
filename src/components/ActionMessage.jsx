@@ -55,7 +55,7 @@ export const ActionMessage = ({ messageStatus }) => {
         </div>
       ) : (
         <div>
-          <span className="error">Error..</span>
+          <span className="error">Error</span>
           <span className="message">Already formatted or clipboard empty.</span>
         </div>
       )}
