@@ -166,6 +166,8 @@ function removeBoldedHeaders(input) {
 }
 
 function removeParagraphTagsFromLists(input) {
+  console.log(input)
+
   let newString = ''
   let inListEditMode = false
   let inParaDeleteMode = false
@@ -175,12 +177,12 @@ function removeParagraphTagsFromLists(input) {
       inListEditMode = detectTag('li', input, i, true)
       newString += input[i]
     } else if (input[i] === '<' && inListEditMode && !inParaDeleteMode) {
-      inParaDeleteMode = detectTag('p', input, i, true)
+      inParaDeleteMode = detectTag('p', input, i, false)
       if (!inParaDeleteMode) newString += input[i]
 
       // get out of inListEditMode
       const closingTag = detectTag('li', input, i, false)
-      if (closingTag && inListEditMode) inListEditMode = !inListEditMode
+      if (closingTag) inListEditMode = !inListEditMode
     } else if (inListEditMode && inParaDeleteMode) {
       if (input[i] === '>') inParaDeleteMode = !inParaDeleteMode
     } else {
@@ -188,6 +190,7 @@ function removeParagraphTagsFromLists(input) {
     }
   }
 
+  console.log(newString)
   return newString
 }
 
