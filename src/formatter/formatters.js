@@ -166,8 +166,6 @@ function removeBoldedHeaders(input) {
 }
 
 function removeParagraphTagsFromLists(input) {
-  console.log(input)
-
   let newString = ''
   let inListEditMode = false
   let inParaDeleteMode = false
@@ -189,8 +187,6 @@ function removeParagraphTagsFromLists(input) {
       newString += input[i]
     }
   }
-
-  console.log(newString)
   return newString
 }
 
