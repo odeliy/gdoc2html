@@ -25,7 +25,17 @@ const formatGdoc = (input, settings) => {
   let platformSelection = getToggleValue(settings, 'platform')
   let websiteSelection = getToggleValue(settings, 'website')
 
-  const junkTags = ['meta', 'b', 'div', 'br', 'colgroup', 'col']
+  const junkTags = [
+    'meta',
+    'b',
+    'div',
+    'br',
+    'colgroup',
+    'col',
+    'html',
+    'body',
+    '<!--StartFragment-->, <!--EndFragment-->'
+  ]
   junkTags.forEach((tag) => {
     newString = removeTag(newString, tag)
   })

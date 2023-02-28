@@ -5,7 +5,7 @@ import { GlobalStyle } from './styles/GlobalStyle'
 import { WindowHead } from './components/WindowHead'
 import { WindowBody } from './components/WindowBody/WindowBody'
 import formatGdoc from './formatter'
-// import { ActionMessage } from './components/ActionMessage'
+import { ActionMessage } from './components/ActionMessage'
 
 const Container = styled.div`
   max-width: ${theme.width};
@@ -13,13 +13,6 @@ const Container = styled.div`
   background-color: ${theme.palette.blackStrong};
   box-shadow: ${theme.palette.blackStrong} 2px 5px 10px;
   border-radius: ${theme.roundedEdge};
-
-  //  DELETE LATER !!!!!!!!!!!!!!!!!
-  .tmp {
-    padding-block: 4em;
-    padding-inline: 2em;
-    color: ${theme.palette.textBold};
-  }
 `
 
 const App = () => {
@@ -42,9 +35,6 @@ const App = () => {
     ]
   )
 
-  //  DELETE LATER !!!!!!!!!!!!!!!!!
-  const [tempDisplay, setTempDisplay] = useState('waiting for paste...')
-
   const [messageStatus, setMessageStatus] = useState({
     isDisplayed: false,
     isSuccess: false,
@@ -57,10 +47,6 @@ const App = () => {
 
   window.addEventListener('paste', (event) => {
     let gdocText = event.clipboardData.getData('text/html')
-
-    if (gdocText) {
-      setTempDisplay(gdocText)
-    }
 
     // check to see if gdocText is valid....
     if (gdocText) {
@@ -104,10 +90,8 @@ const App = () => {
       <Container>
         <WindowHead />
         <WindowBody settings={settings} toggleSetting={toggleSetting} />
-        {/* // DELETE LATER !!!!!!!!!!!!!!!!! */}
-        <div className="tmp">{tempDisplay}</div>
       </Container>
-      {/* {messageStatus.isDisplayed && <ActionMessage messageStatus={messageStatus} />} */}
+      {messageStatus.isDisplayed && <ActionMessage messageStatus={messageStatus} />}
     </ThemeProvider>
   )
 }
