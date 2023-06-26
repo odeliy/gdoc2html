@@ -68,6 +68,9 @@ function formatTable(input) {
 }
 
 export default function formatTables(input, website, platform) {
+  // quick fix: force platform to WP, removing SB toggle option
+  platform = 'wordpress'
+  
   // 0. modify table and head based on website and platform
   let newString = ''
 

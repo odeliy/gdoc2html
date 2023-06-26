@@ -33,7 +33,7 @@ export const Footer = () => {
           formatted text to your clipboard.
         </li>
         <li>In WordPress: Paste the formatted text into the "Text" panel.</li>
-        <li>In Storyblok: Paste the formatted text into the "Source code" of a WYSIWYG block.</li>
+        {/* <li>In Storyblok: Paste the formatted text into the "Source code" of a WYSIWYG block.</li> */}
       </ol>
     </StyledFooter>
   )

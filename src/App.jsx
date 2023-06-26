@@ -17,14 +17,14 @@ const Container = styled.div`
 
 const App = () => {
   const [settings, setSettings] = useState(
-    JSON.parse(localStorage.getItem('gdoc2html_settings')) || [
-      {
-        name: 'platform',
-        togglePositionLeft: true,
-        toggleLabels: ['WP', 'SB'],
-        toggleValues: ['wordpress', 'storyblok'],
-        description: 'CMS platform. WordPress or Storyblok'
-      },
+    JSON.parse(localStorage.getItem('gdoc2html_cookie')) || [
+      // {
+      //   name: 'platform',
+      //   togglePositionLeft: true,
+      //   toggleLabels: ['WP', 'SB'],
+      //   toggleValues: ['wordpress', 'storyblok'],
+      //   description: 'CMS platform. WordPress or Storyblok'
+      // },
       {
         name: 'website',
         togglePositionLeft: true,
@@ -42,7 +42,7 @@ const App = () => {
   })
 
   useEffect(() => {
-    localStorage.setItem('gdoc2html_settings', JSON.stringify(settings))
+    localStorage.setItem('gdoc2html_cookie', JSON.stringify(settings))
   }, [settings])
 
   window.addEventListener('paste', (event) => {
