@@ -75,7 +75,7 @@ export default function formatTables(input, website, platform) {
     if (website === 'bankrate.com') {
       newString = input.replace(
         /<table>/g, // using regex and global flag replaces all instances of
-        '<table class="table --bordered --spacing-xs"><thead><fragment></thead>'
+        '<table class="table --striped --spacing-xs"><thead><fragment></thead>'
       )
     } else if (website === 'creditcards.com') {
       newString = input.replace(
