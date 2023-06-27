@@ -22,7 +22,7 @@ export const Footer = () => {
       <h2>What is this?</h2>
       <p>
         This application formats rich text from Google Docs into clean HTML that can be pasted
-        directly into the WordPress text editor or Storyblok source code section.
+        directly into the WordPress text editor (i.e. code section).
       </p>
       <h2>How to use:</h2>
       <ol>
