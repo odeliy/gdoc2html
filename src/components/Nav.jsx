@@ -4,13 +4,14 @@ import theme from '../styles/theme'
 
 const StyledNav = styled.div`
   ul {
+    padding-inline: ${theme.gap.md};
     margin-top: ${theme.gap.md};
     list-style-type: none;
     max-width: ${theme.width};
     display: flex;
     gap: ${theme.gap.lg};
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
   }
 
   ul li a {
