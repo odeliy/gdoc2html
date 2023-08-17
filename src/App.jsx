@@ -15,23 +15,25 @@ const Container = styled.div`
   box-shadow: ${theme.palette.blackStrong} 2px 5px 10px;
   border-radius: ${theme.roundedEdge};
 `
+// reset this ID string whenever updating settings
+let cookieID = 'gdoc2html_cookieID_0'
 
 const App = () => {
   const [settings, setSettings] = useState(
-    JSON.parse(localStorage.getItem('gdoc2html_cookie')) || [
-      // {
-      //   name: 'platform',
-      //   togglePositionLeft: true,
-      //   toggleLabels: ['WP', 'SB'],
-      //   toggleValues: ['wordpress', 'storyblok'],
-      //   description: 'CMS platform. WordPress or Storyblok'
-      // },
+    JSON.parse(localStorage.getItem(cookieID)) || [
       {
         name: 'website',
         togglePositionLeft: true,
         toggleLabels: ['BR', 'CC'],
         toggleValues: ['bankrate.com', 'creditcards.com'],
         description: 'Website defaults. Bankrate or CreditCards'
+      },
+      {
+        name: 'listStyle',
+        togglePositionLeft: false,
+        toggleLabels: ['ON', 'OFF'],
+        toggleValues: ['listStyleOn', 'listStyleOff'],
+        description: '(Experimental feature) Fancy list styling'
       }
     ]
   )
@@ -43,7 +45,7 @@ const App = () => {
   })
 
   useEffect(() => {
-    localStorage.setItem('gdoc2html_cookie', JSON.stringify(settings))
+    localStorage.setItem(cookieID, JSON.stringify(settings))
   }, [settings])
 
   window.addEventListener('paste', (event) => {

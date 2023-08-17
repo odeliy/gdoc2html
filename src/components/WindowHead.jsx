@@ -15,7 +15,7 @@ const StyledWindowHead = styled.div`
 export const WindowHead = () => {
   return (
     <StyledWindowHead>
-      <span>v3.4.1</span>
+      <span>v3.5.0</span>
     </StyledWindowHead>
   )
 }
