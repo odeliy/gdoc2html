@@ -16,6 +16,9 @@ export const WindowHead = () => {
   return (
     <StyledWindowHead>
       <span>v3.5.0</span>
+      <span>
+        <a href="https://github.com/odeliy/gdoc2html">github</a>
+      </span>
     </StyledWindowHead>
   )
 }

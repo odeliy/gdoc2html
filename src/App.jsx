@@ -6,11 +6,10 @@ import { WindowHead } from './components/WindowHead'
 import { WindowBody } from './components/WindowBody/WindowBody'
 import formatGdoc from './formatter'
 import { ActionMessage } from './components/ActionMessage'
-import { Nav } from './components/Nav'
 
 const Container = styled.div`
   max-width: ${theme.width};
-  margin-top: ${theme.gap.md};
+  margin-top: ${theme.gap.lg};
   background-color: ${theme.palette.blackStrong};
   box-shadow: ${theme.palette.blackStrong} 2px 5px 10px;
   border-radius: ${theme.roundedEdge};
@@ -90,7 +89,6 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Nav />
       <Container>
         <WindowHead />
         <WindowBody settings={settings} toggleSetting={toggleSetting} />
