@@ -113,6 +113,8 @@ function formatLinks(input, websiteName) {
         isInternalLink = detectFor(url, 0, websiteName)
         if (!isInternalLink) {
           newString += 'target="_blank" rel="noopener"'
+        } else if (isInternalLink) {
+          newString += 'rel=“nofollow”'
         }
         newString += '>'
         isLink = false
