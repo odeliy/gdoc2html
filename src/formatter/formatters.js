@@ -114,7 +114,7 @@ function formatLinks(input, websiteName) {
         if (!isInternalLink) {
           newString += 'target="_blank" rel="noopener"'
         } else if (isInternalLink) {
-          newString += 'rel=“nofollow”'
+          newString += 'rel="nofollow"'
         }
         newString += '>'
         isLink = false

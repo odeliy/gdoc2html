@@ -90,7 +90,6 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Nav />
       <Container>
         <WindowHead />
         <WindowBody settings={settings} toggleSetting={toggleSetting} />
