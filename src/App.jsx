@@ -6,17 +6,16 @@ import { WindowHead } from './components/WindowHead'
 import { WindowBody } from './components/WindowBody/WindowBody'
 import formatGdoc from './formatter'
 import { ActionMessage } from './components/ActionMessage'
-import { Nav } from './components/Nav'
 
 const Container = styled.div`
   max-width: ${theme.width};
-  margin-top: ${theme.gap.md};
+  margin-top: ${theme.gap.lg};
   background-color: ${theme.palette.blackStrong};
   box-shadow: ${theme.palette.blackStrong} 2px 5px 10px;
   border-radius: ${theme.roundedEdge};
 `
 // reset this ID string whenever updating settings
-let cookieID = 'gdoc2html_cookieID_0'
+let cookieID = 'gdoc2html_cookieID_1'
 
 const App = () => {
   const [settings, setSettings] = useState(
@@ -33,7 +32,7 @@ const App = () => {
         togglePositionLeft: false,
         toggleLabels: ['ON', 'OFF'],
         toggleValues: ['listStyleOn', 'listStyleOff'],
-        description: '(Experimental feature) Fancy list styling'
+        description: 'Bankrate blue list styling'
       }
     ]
   )
