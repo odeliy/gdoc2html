@@ -15,7 +15,7 @@ const StyledWindowHead = styled.div`
 export const WindowHead = () => {
   return (
     <StyledWindowHead>
-      <span>v3.5.0</span>
+      <span>v3.5.1</span>
       <span>
         <a href="https://github.com/odeliy/gdoc2html">github</a>
       </span>

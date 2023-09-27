@@ -27,7 +27,7 @@ function styleLists(input, toggleValue) {
         }
       } else if (inListItemTag) {
         if (input[i] === '>') {
-          newString += '<li class="List-item">'
+          newString += '<li class="List-item mb-4">'
           inListItemTag = false
         }
       } else {
