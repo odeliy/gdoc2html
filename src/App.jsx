@@ -15,7 +15,7 @@ const Container = styled.div`
   border-radius: ${theme.roundedEdge};
 `
 // reset this ID string whenever updating settings
-let cookieID = 'gdoc2html_cookieID_1'
+let cookieID = 'TESTING-gdoc2html_cookieID_1'
 
 const App = () => {
   const [settings, setSettings] = useState(
@@ -26,13 +26,6 @@ const App = () => {
         toggleLabels: ['BR', 'CC'],
         toggleValues: ['bankrate.com', 'creditcards.com'],
         description: 'Website defaults. Bankrate or CreditCards'
-      },
-      {
-        name: 'listStyle',
-        togglePositionLeft: false,
-        toggleLabels: ['ON', 'OFF'],
-        toggleValues: ['listStyleOn', 'listStyleOff'],
-        description: 'Bankrate blue list styling'
       }
     ]
   )

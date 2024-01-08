@@ -7,7 +7,6 @@ import {
   swapTags
 } from './formatters.js'
 import formatTables from './formatTables.js'
-import styleLists from './styleLists.js'
 
 const getToggleValue = (settings, toggleName) => {
   let toggleValue = ''
@@ -25,7 +24,6 @@ const formatGdoc = (input, settings) => {
   let newString = input
   let platformSelection = getToggleValue(settings, 'platform')
   let websiteSelection = getToggleValue(settings, 'website')
-  let listStyleSelection = getToggleValue(settings, 'listStyle')
 
   const junkTags = [
     'meta',
@@ -50,7 +48,6 @@ const formatGdoc = (input, settings) => {
   newString = removeBoldedHeaders(newString)
   newString = removeParagraphTagsFromLists(newString)
   newString = formatTables(newString, websiteSelection, platformSelection)
-  newString = styleLists(newString, listStyleSelection)
 
   return newString
 }
