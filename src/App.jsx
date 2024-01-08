@@ -15,7 +15,7 @@ const Container = styled.div`
   border-radius: ${theme.roundedEdge};
 `
 // reset this ID string whenever updating settings
-let cookieID = 'TESTING-gdoc2html_cookieID_1'
+let cookieID = 'gdoc2html_cookieID_2'
 
 const App = () => {
   const [settings, setSettings] = useState(
